@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-charcoal:       #1C1C1C;
+  --color-accent:         #9D7C64;
+  --color-accent-hover:   #866A56;
+  --color-whatsapp:       #25D366;
+  --color-whatsapp-hover: #1da851;
+  --color-surface-tint:   #F3F2EF;
+  --color-muted:          #8A8680;
+  --color-border:         #DDDBD6;
+
+  --font-sans:    var(--font-inter);
+  --font-heading: var(--font-montserrat);
+}
+
+body {
+  background: #FAFAF9;
+  color: #1C1C1C;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
+}
