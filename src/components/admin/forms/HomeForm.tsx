@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import type { HomePageData, Stat, ProcessStep } from "@/types/content";
 import { getHomeContent, saveHomeContent } from "@/lib/firestore/home";
 import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 // ── Mevcut hardcoded değerler (Firestore boşken bunlar gösterilir) ──────────
 const DEFAULTS: HomePageData = {
@@ -124,8 +125,13 @@ export default function HomeForm() {
         <Field label="Alt başlık">
           <TA rows={2} value={form.heroSubtitle} onChange={(v) => set("heroSubtitle", v)} />
         </Field>
-        <Field label="Arka plan görseli URL" hint="Tam URL girin (jpg, png veya webp)">
-          <TI value={form.heroImageUrl} onChange={(v) => set("heroImageUrl", v)} placeholder="https://..." />
+        <Field label="Arka plan görseli">
+          <ImageUploadField
+            value={form.heroImageUrl}
+            onChange={(v) => set("heroImageUrl", v)}
+            storagePath="hero"
+            fallbackUrl="/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (10).jpeg"
+          />
         </Field>
         <Field label="WhatsApp butonu metni">
           <TI value={form.heroWhatsappText} onChange={(v) => set("heroWhatsappText", v)} />
