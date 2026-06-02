@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { MessageCircle, ChevronDown } from "lucide-react";
 
 // Mevcut hardcoded değerler — Firestore boşken bunlar kullanılır
@@ -7,7 +7,7 @@ const D = {
   title:         "Çeliğin Gücüyle\nGeleceği İnşa Ediyoruz",
   subtitle:      "Hafif çelik, prefabrik, konteyner ve endüstriyel yapı sistemlerinde güçlü üretim çözümleri.",
   imageUrl:      "/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (10).jpeg",
-  whatsapp:      "90XXXXXXXXXX",
+  whatsapp:      "905078363661",
   whatsappText:  "WhatsApp'tan Yazın",
   secondaryText: "Hizmetlerimizi Keşfedin",
 };

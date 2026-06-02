@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -16,7 +16,7 @@ const NAV_LINKS = [
 ] as const;
 
 const WHATSAPP_HREF =
-  "https://wa.me/90XXXXXXXXXX?text=Merhaba%2C%20bilgi%20almak%20istiyorum.";
+  "https://wa.me/905078363661?text=Merhaba%2C%20bilgi%20almak%20istiyorum.";
 
 // Shared base class for every nav item — text brightness is the sole state indicator
 const NAV_ITEM =

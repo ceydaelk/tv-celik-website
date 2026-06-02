@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { MessageCircle } from "lucide-react";
 
@@ -6,7 +6,7 @@ interface WhatsAppFABProps {
   phone?: string;
 }
 
-export function WhatsAppFAB({ phone = "90XXXXXXXXXX" }: WhatsAppFABProps) {
+export function WhatsAppFAB({ phone = "905078363661" }: WhatsAppFABProps) {
   return (
     <div className="group fixed bottom-6 right-6 z-50">
       {/* Tooltip */}

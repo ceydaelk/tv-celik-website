@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -118,7 +118,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* WhatsApp button */}
         <a
-          href="https://wa.me/90XXXXXXXXXX?text=Merhaba%2C%20bilgi%20almak%20istiyorum."
+          href="https://wa.me/905078363661?text=Merhaba%2C%20bilgi%20almak%20istiyorum."
           target="_blank"
           rel="noopener noreferrer"
           className="mt-6 flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366]/50 py-3 text-base font-bold text-[#25D366] transition-all duration-300 ease-out hover:bg-[#25D366] hover:border-[#25D366] hover:text-white active:scale-[0.97]"

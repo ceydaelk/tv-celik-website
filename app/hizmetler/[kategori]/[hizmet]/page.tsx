@@ -63,7 +63,7 @@ export default async function HizmetDetayPage({
   const hcSvc = SERVICES_MAP[hizmet]?.categorySlug === kategori ? SERVICES_MAP[hizmet] : null;
   if (!fsSub && !hcSvc) notFound();
 
-  const whatsappPhone = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsappPhone = company.whatsapp ?? "905078363661";
 
   const category   = CATEGORIES.find((c) => c.slug === kategori) ?? { header: kategori, slug: kategori, subcategories: [], description: "" };
   const isFoldable = FOLDABLE_SLUGS.includes(hizmet as typeof FOLDABLE_SLUGS[number]);

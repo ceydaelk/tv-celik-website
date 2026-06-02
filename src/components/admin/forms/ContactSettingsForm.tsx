@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
@@ -11,7 +11,7 @@ type ContactFields = Pick<CompanyData, "phone" | "email" | "whatsapp" | "address
 const DEFAULTS: ContactFields = {
   phone:    "+90 XXX XXX XX XX",
   email:    "info@tvcelik.com",
-  whatsapp: "90XXXXXXXXXX",
+  whatsapp: "905078363661",
   addresses: [
     { type: "Merkez",   text: "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul" },
     { type: "Showroom", text: "Kargalı Hanbaba Mh. Sakarya Cd. No:336/A Hendek / Sakarya" },

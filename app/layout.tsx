@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { WhatsAppFAB } from "@/components/common/WhatsAppFAB";
@@ -29,7 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const company = await getCompanyData();
-  const whatsappPhone = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsappPhone = company.whatsapp ?? "905078363661";
 
   return (
     <html lang="tr" className={`${inter.variable} ${montserrat.variable} h-full antialiased`}>

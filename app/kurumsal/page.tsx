@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
 import { getCompanyData } from "@/lib/firestore/company";
 
@@ -16,7 +16,7 @@ export default async function KurumsalPage() {
   const about3  = company.about3  ?? "Çevreye, canlılara ve insana duyarlı yaklaşımımızla; dayanıklı, fonksiyonel ve modern yapılar üretmeye, yaşam alanlarını yeniden tanımlamaya devam ediyoruz.";
   const mission = company.mission ?? "Kaliteli, dayanıklı ve hızlı uygulanabilir hafif çelik, prefabrik ve modüler yapı çözümleri üreterek; müşterilerimize güvenli, ekonomik ve uzun ömürlü yaşam ve çalışma alanları sunmak.";
   const vision  = company.vision  ?? "Hafif çelik ve modüler yapı sistemlerinde yenilikçi üretim anlayışıyla Türkiye’de ve dünyada güvenilir, güçlü ve tercih edilen bir marka olmak.";
-  const whatsapp = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsapp = company.whatsapp ?? "905078363661";
 
   return (
     <div className="bg-[#FAFAF9]">

@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { getCompanyData } from "@/lib/firestore/company";
@@ -28,7 +28,7 @@ export default async function Footer() {
 
   const phone    = company.phone    ?? "+90 XXX XXX XX XX";
   const email    = company.email    ?? "info@tvcelik.com";
-  const whatsapp = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsapp = company.whatsapp ?? "905078363661";
   const address  = company.addresses?.find((a) => a.type === "Merkez")?.text
     ?? "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul";
 

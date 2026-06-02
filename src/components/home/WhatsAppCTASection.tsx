@@ -1,10 +1,10 @@
-import { MessageCircle } from "lucide-react";
+﻿import { MessageCircle } from "lucide-react";
 
 const D = {
   title:        "Projenizi Konuşalım",
   description:  "Prefabrik yapı, çelik sistem veya konteyner çözümü için teklif almak ister misiniz? WhatsApp'tan yazın, en kısa sürede yanıt veririz.",
   responseNote: "Ortalama yanıt süresi: 1 saat içinde",
-  whatsapp:     "90XXXXXXXXXX",
+  whatsapp:     "905078363661",
 };
 
 interface WhatsAppCTASectionProps {

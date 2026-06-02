@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { getCompanyData } from "@/lib/firestore/company";
 
@@ -12,7 +12,7 @@ export default async function IletisimPage() {
 
   const phone    = company.phone    ?? "+90 XXX XXX XX XX";
   const email    = company.email    ?? "info@tvcelik.com";
-  const whatsapp = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsapp = company.whatsapp ?? "905078363661";
 
   const merkez   = company.addresses?.find((a) => a.type === "Merkez")?.text
     ?? "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul";

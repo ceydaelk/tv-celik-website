@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { getProjects } from "@/lib/firestore/projects";
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default async function ProjelerPage() {
   const [projects, company] = await Promise.all([getProjects(), getCompanyData()]);
-  const whatsapp = company.whatsapp ?? "90XXXXXXXXXX";
+  const whatsapp = company.whatsapp ?? "905078363661";
 
   return (
     <div className="bg-[#FAFAF9]">

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import type { HomePageData, Stat, ProcessStep } from "@/types/content";
@@ -11,7 +11,7 @@ const DEFAULTS: HomePageData = {
   heroTitle:         "Çeliğin Gücüyle\nGeleceği İnşa Ediyoruz",
   heroSubtitle:      "Hafif çelik, prefabrik, konteyner ve endüstriyel yapı sistemlerinde güçlü üretim çözümleri.",
   heroImageUrl:      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80&auto=format&fit=crop",
-  whatsappNumber:    "90XXXXXXXXXX",
+  whatsappNumber:    "905078363661",
   heroWhatsappText:  "WhatsApp'tan Yazın",
   heroSecondaryText: "Hizmetlerimizi Keşfedin",
   stats: [
