@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function IletisimPage() {
   const company = await getCompanyData();
 
-  const phone    = company.phone    ?? "+90 XXX XXX XX XX";
+  const phone    = company.phone    ?? "+90 507 836 36 61";
   const email    = company.email    ?? "info@tvcelik.com";
   const whatsapp = company.whatsapp ?? "905078363661";
 

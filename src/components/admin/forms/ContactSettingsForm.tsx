@@ -9,7 +9,7 @@ import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus"
 type ContactFields = Pick<CompanyData, "phone" | "email" | "whatsapp" | "addresses">;
 
 const DEFAULTS: ContactFields = {
-  phone:    "+90 XXX XXX XX XX",
+  phone:    "+90 507 836 36 61",
   email:    "info@tvcelik.com",
   whatsapp: "905078363661",
   addresses: [
