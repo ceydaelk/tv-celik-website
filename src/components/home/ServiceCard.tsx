@@ -12,14 +12,6 @@ interface ServiceCardProps {
   isFoldable?: boolean;
 }
 
-const CATEGORY_IMAGES: Record<string, string> = {
-  "prefabrik-yapilar":
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=75&auto=format&fit=crop",
-  "hafif-celik-yapilar":
-    "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=75&auto=format&fit=crop",
-  // konteyner-sistemleri, endustriyel-celik-yapilar, yapisal-bilesenler intentionally omitted
-  // until proper photos are available — cards fall back to CATEGORY_BG gradient
-};
 
 const CATEGORY_BG: Record<string, string> = {
   "prefabrik-yapilar":
@@ -47,14 +39,9 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   const bg = CATEGORY_BG[categorySlug] ?? DEFAULT_BG;
   // Priority: Firestore URL → service cover → (category cover only for homepage) → Unsplash
-  // getCategoryCoverImage is intentionally excluded from the listing variant — it returns
-  // the tek-katli image for the whole prefabrik-yapilar category, which must not bleed
-  // onto unrelated individual service cards.
   const imgSrc = imagePlaceholder?.startsWith("http")
     ? imagePlaceholder
-    : (getServiceCoverImage(slug)
-       ?? (variant === "homepage" ? getCategoryCoverImage(categorySlug) : undefined)
-       ?? CATEGORY_IMAGES[categorySlug]);
+    : (getServiceCoverImage(slug) ?? getCategoryCoverImage(categorySlug));
 
   if (variant === "homepage") {
     return (

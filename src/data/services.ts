@@ -249,15 +249,15 @@ export const CATEGORIES: Category[] = [
 
 export const CATEGORY_IMAGES: Record<string, string> = {
   "prefabrik-yapilar":
-    "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80&auto=format&fit=crop",
+    "/assets/services/tek-katli-prefabrik/tek-katli-prefabrik-cover (1).jpeg",
   "hafif-celik-yapilar":
-    "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80&auto=format&fit=crop",
+    "/assets/services/cift-katli-hafif-celik/cift-katli-hafif-celik-cover (5).jpeg",
   "konteyner-sistemleri":
-    "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1200&q=80&auto=format&fit=crop",
+    "/assets/services/cift-katli-prefabrik-2/cift-katli-prefabrik-cover(4).jpeg",
   "endustriyel-celik-yapilar":
-    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&q=80&auto=format&fit=crop",
+    "/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (1).jpeg",
   "yapisal-bilesenler":
-    "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=1200&q=80&auto=format&fit=crop",
+    "/assets/services/cift-katli-prefabrik/cift-katli-prefabrik (2).jpeg",
 };
 
 export const SERVICES_MAP: Record<string, Subcategory> = Object.fromEntries(
