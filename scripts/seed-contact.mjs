@@ -1,12 +1,9 @@
 /**
  * Tek seferlik çalıştırılacak script.
- * Firestore site/company dokümanını doğru iletişim bilgileriyle günceller.
+ * Firestore site/company ve site/home dokümanlarını doğru iletişim bilgileriyle günceller.
  *
  * Kullanım:
  *   node scripts/seed-contact.mjs <firebase-auth-sifresi>
- *
- * Örnek:
- *   node scripts/seed-contact.mjs mysecretpassword
  */
 
 import { readFileSync } from "fs";
@@ -15,7 +12,6 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// .env.local dosyasını parse et
 function loadEnv() {
   const envPath = join(__dirname, "..", ".env.local");
   const lines = readFileSync(envPath, "utf8").split("\n");
@@ -30,29 +26,22 @@ function loadEnv() {
 }
 
 const env = loadEnv();
-const API_KEY    = env.NEXT_PUBLIC_FIREBASE_API_KEY;
-const PROJECT_ID = env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+const API_KEY     = env.NEXT_PUBLIC_FIREBASE_API_KEY;
+const PROJECT_ID  = env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 const ADMIN_EMAIL = env.NEXT_PUBLIC_ADMIN_EMAIL;
-const password   = process.argv[2];
+const password    = process.argv[2];
 
 if (!password) {
   console.error("Hata: Şifre eksik.\nKullanım: node scripts/seed-contact.mjs <şifre>");
   process.exit(1);
 }
-
 if (!API_KEY || !PROJECT_ID || !ADMIN_EMAIL) {
   console.error("Hata: .env.local dosyasında Firebase yapılandırması eksik.");
   process.exit(1);
 }
 
-// Güncellenecek iletişim bilgileri
-const CONTACT = {
-  phone:    "+90 507 836 36 61",
-  email:    "info@tvcelik.com",
-  whatsapp: "905078363661",
-};
+const WHATSAPP = "905078363661";
 
-// 1. Firebase Auth ile giriş yap → idToken al
 async function signIn() {
   const res = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
@@ -70,20 +59,11 @@ async function signIn() {
   return json.idToken;
 }
 
-// 2. Firestore PATCH — yalnızca phone/email/whatsapp alanlarını güncelle
-async function patchCompany(idToken) {
+async function patch(idToken, collection, docId, fields, maskFields) {
+  const mask = maskFields.map((f) => `updateMask.fieldPaths=${f}`).join("&");
   const url =
     `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}` +
-    `/databases/(default)/documents/site/company` +
-    `?updateMask.fieldPaths=phone&updateMask.fieldPaths=email&updateMask.fieldPaths=whatsapp`;
-
-  const body = {
-    fields: {
-      phone:    { stringValue: CONTACT.phone },
-      email:    { stringValue: CONTACT.email },
-      whatsapp: { stringValue: CONTACT.whatsapp },
-    },
-  };
+    `/databases/(default)/documents/${collection}/${docId}?${mask}`;
 
   const res = await fetch(url, {
     method: "PATCH",
@@ -91,27 +71,39 @@ async function patchCompany(idToken) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${idToken}`,
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({ fields }),
   });
-
   const json = await res.json();
   if (!res.ok) {
-    console.error("Firestore güncelleme başarısız:", json.error?.message ?? JSON.stringify(json));
+    console.error(`Firestore ${collection}/${docId} güncellenemedi:`, json.error?.message ?? JSON.stringify(json));
     process.exit(1);
   }
-  return json;
 }
 
-// Ana akış
 console.log(`Firebase Auth: ${ADMIN_EMAIL} ile giriş yapılıyor...`);
 const idToken = await signIn();
-console.log("Giriş başarılı.");
+console.log("Giriş başarılı.\n");
 
-console.log("Firestore site/company güncelleniyor...");
-await patchCompany(idToken);
+// site/company — phone, email, whatsapp
+console.log("site/company güncelleniyor...");
+await patch(idToken, "site", "company",
+  {
+    phone:    { stringValue: "+90 507 836 36 61" },
+    email:    { stringValue: "info@tvcelik.com" },
+    whatsapp: { stringValue: WHATSAPP },
+  },
+  ["phone", "email", "whatsapp"]
+);
+console.log("  ✓ phone:    +90 507 836 36 61");
+console.log("  ✓ email:    info@tvcelik.com");
+console.log("  ✓ whatsapp: 905078363661");
 
-console.log("\nBaşarılı! Güncellenen alanlar:");
-console.log(`  phone:    ${CONTACT.phone}`);
-console.log(`  email:    ${CONTACT.email}`);
-console.log(`  whatsapp: ${CONTACT.whatsapp}`);
-console.log("\nSiteyi yenileyin — değişiklikler ISR cache süresi (10 sn) sonra görünür.");
+// site/home — whatsappNumber
+console.log("\nsite/home güncelleniyor...");
+await patch(idToken, "site", "home",
+  { whatsappNumber: { stringValue: WHATSAPP } },
+  ["whatsappNumber"]
+);
+console.log("  ✓ whatsappNumber: 905078363661");
+
+console.log("\nTamamlandı. Değişiklikler ISR cache süresi (10 sn) sonra yansır.");
