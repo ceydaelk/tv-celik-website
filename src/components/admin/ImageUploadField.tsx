@@ -36,7 +36,12 @@ export default function ImageUploadField({
     setErr("");
 
     try {
-      // Dynamic import keeps Firebase Storage out of the server bundle
+      const { auth } = await import("@/lib/firebase/auth");
+      if (!auth.currentUser) {
+        setErr("Yükleme yapabilmek için giriş yapmış olmanız gerekir.");
+        return;
+      }
+
       const { storage }                          = await import("@/lib/firebase/storage");
       const { ref, uploadBytes, getDownloadURL } = await import("firebase/storage");
 
@@ -46,14 +51,14 @@ export default function ImageUploadField({
       const snapshot = await uploadBytes(ref(storage, path), file);
       const url      = await getDownloadURL(snapshot.ref);
 
-      onChange(url);         // triggers re-render; stored becomes true; preview updates immediately
+      onChange(url);
     } catch (e) {
-      // Show the real Firebase error so the exact cause is visible
-      const msg = e instanceof Error ? e.message : String(e);
-      setErr(msg);
+      console.error("[ImageUploadField] upload error:", e);
+      const code = (e as { code?: string }).code;
+      const msg  = e instanceof Error ? e.message : String(e);
+      setErr(code ? `[${code}] ${msg}` : msg);
     } finally {
       setUploading(false);
-      // Reset input so the same file can be selected again if needed
       if (fileRef.current) fileRef.current.value = "";
     }
   }
