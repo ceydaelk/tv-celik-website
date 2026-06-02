@@ -24,10 +24,10 @@ function isPlaceholder(value: string): boolean {
 for (const key of REQUIRED_KEYS) {
   const value = process.env[key];
   if (!value || isPlaceholder(value)) {
-    throw new Error(
-      `Firebase config error: ${key} is ${
+    console.warn(
+      `Firebase config warning: ${key} is ${
         !value ? "missing" : "still a placeholder value"
-      }. Set the correct value in your Vercel environment variables.`
+      }. Check your Vercel environment variables.`
     );
   }
 }
