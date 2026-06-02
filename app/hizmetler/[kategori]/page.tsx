@@ -53,7 +53,7 @@ export default async function KategoriPage({
   return (
     <div className="bg-[#FAFAF9]">
       {/* Page header */}
-      <div className="bg-[#1C1C1C] py-16">
+      <div className="bg-[#1C1C1C] py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <BreadcrumbNav
             items={[
@@ -62,7 +62,7 @@ export default async function KategoriPage({
               { label: categoryHeader },
             ]}
           />
-          <h1 className="text-4xl font-bold text-white leading-tight mt-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mt-4">
             {categoryHeader}
           </h1>
           <p className="mt-3 text-base font-normal text-white/60 max-w-xl">

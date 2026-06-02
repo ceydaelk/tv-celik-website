@@ -21,8 +21,8 @@ export default function ImageUploadField({
   const [err, setErr]             = useState("");
   const fileRef                   = useRef<HTMLInputElement>(null);
 
-  const stored   = value?.startsWith("http");          // saved in Firestore
-  const fallback = !stored && fallbackUrl?.startsWith("http"); // no saved URL, but public page shows this
+  const stored   = value?.startsWith("http");  // saved in Firestore
+  const fallback = !stored && !!fallbackUrl;   // no saved URL, but public page shows this (local or http)
 
   async function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];

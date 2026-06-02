@@ -39,8 +39,8 @@ export default async function HizmetlerPage() {
             { label: "Hizmetler" },
           ]}
         />
-        <h1 className="text-4xl font-bold text-[#1C1C1C] mb-2 mt-4">Hizmetlerimiz</h1>
-        <p className="text-base font-normal text-[#8A8680] mb-12">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#1C1C1C] mb-2 mt-4">Hizmetlerimiz</h1>
+        <p className="text-base font-normal text-[#8A8680] mb-8 sm:mb-12">
           Prefabrik yapılar, hafif çelik sistemler, konteyner çözümleri ve daha fazlası.
         </p>
       </div>
@@ -49,7 +49,7 @@ export default async function HizmetlerPage() {
         <section
           key={cat.slug}
           id={cat.slug}
-          className="py-16 border-t border-[#DDDBD6] first:border-t-0"
+          className="py-10 sm:py-16 border-t border-[#DDDBD6] first:border-t-0"
         >
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-xl font-bold text-[#9D7C64] mb-2">{cat.header}</h2>

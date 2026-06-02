@@ -24,21 +24,21 @@ export default async function IletisimPage() {
   return (
     <div className="bg-[#FAFAF9]">
       {/* Page header */}
-      <div className="bg-[#1C1C1C] py-16">
+      <div className="bg-[#1C1C1C] py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-sm font-normal text-[#9D7C64] uppercase tracking-widest mb-3">
             Bize Ulaşın
           </p>
-          <h1 className="text-4xl font-bold text-white leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-[1.1]">
             İletişim
           </h1>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-6 py-10 sm:py-16">
 
         {/* Primary WhatsApp CTA */}
-        <div className="bg-[#1C1C1C] rounded-lg p-8 text-center mb-12">
+        <div className="bg-[#1C1C1C] rounded-lg p-5 sm:p-8 text-center mb-8 sm:mb-12">
           <h2 className="text-xl font-bold text-white mb-3">
             En Hızlı Yol: WhatsApp
           </h2>
@@ -50,7 +50,7 @@ export default async function IletisimPage() {
             href={`https://wa.me/${whatsapp}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-8 py-4 text-base font-bold text-white transition-colors duration-150 hover:bg-[#1da851] active:scale-95 focus:outline-2 focus:outline-white"
+            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 sm:px-8 sm:py-4 text-base font-bold text-white transition-colors duration-150 hover:bg-[#1da851] active:scale-95 focus:outline-2 focus:outline-white"
           >
             <MessageCircle size={20} />
             WhatsApp&apos;tan Yazın

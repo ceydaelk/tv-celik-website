@@ -49,7 +49,7 @@ export async function fetchDoc(
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 }, // 60 saniyede bir yenile (ISR)
+      next: { revalidate: 10 }, // 10 saniyede bir yenile (ISR)
     });
     if (!res.ok) return {};
     const json = await res.json();
@@ -73,7 +73,7 @@ export async function fetchCollection(
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 60 },
+      next: { revalidate: 10 },
     });
     if (!res.ok) return [];
     const json = await res.json();

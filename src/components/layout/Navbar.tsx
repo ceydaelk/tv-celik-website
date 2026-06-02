@@ -18,14 +18,12 @@ const NAV_LINKS = [
 const WHATSAPP_HREF =
   "https://wa.me/90XXXXXXXXXX?text=Merhaba%2C%20bilgi%20almak%20istiyorum.";
 
-// Shared base class for every nav item — keeps hover/active states consistent
+// Shared base class for every nav item — text brightness is the sole state indicator
 const NAV_ITEM =
-  "relative px-5 py-3 text-sm font-normal transition-[color,transform] duration-200 ease-out focus:outline-2 focus:outline-[#9D7C64] " +
-  "after:absolute after:bottom-[3px] after:left-0 after:h-[2px] after:w-full after:origin-left after:bg-[#9D7C64] after:transition-transform after:duration-200 after:ease-out";
+  "px-5 py-3 text-sm font-normal transition-colors duration-200 ease-out focus:outline-none";
 
-const NAV_ACTIVE = "text-white after:scale-x-100";
-const NAV_IDLE =
-  "text-white/60 after:scale-x-0 hover:text-[#D4B896] hover:-translate-y-px hover:after:scale-x-100 hover:drop-shadow-[0_0_10px_rgba(212,184,150,0.12)]";
+const NAV_ACTIVE = "text-white";
+const NAV_IDLE   = "text-white/50 hover:text-white/85";
 
 export default function Navbar() {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);

@@ -25,11 +25,11 @@ export default function ProcessSection({
   const displaySteps = steps?.length ? steps : DEFAULT_STEPS;
 
   return (
-    <section className="bg-[#111111] py-24">
+    <section className="bg-[#111111] py-12 sm:py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section header */}
-        <div className="mb-16">
+        <div className="mb-8 sm:mb-12 lg:mb-16">
           <div className="border-l-2 border-[#9D7C64] pl-5">
             <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#9D7C64]">
               Nasıl Çalışıyoruz
@@ -44,7 +44,7 @@ export default function ProcessSection({
         </div>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-5 md:gap-6 lg:gap-8">
           {displaySteps.map((step) => (
             <div
               key={step.number}
@@ -53,7 +53,7 @@ export default function ProcessSection({
               {/* Copper reveal line — slides in from left on hover */}
               <div className="absolute top-0 left-0 right-0 h-px origin-left scale-x-0 bg-[#9D7C64] transition-transform duration-300 ease-out group-hover:scale-x-100" />
 
-              <p className="mb-5 text-[48px] font-bold leading-none tracking-tight text-[#9D7C64]/20 transition-colors duration-300 group-hover:text-[#9D7C64]/40">
+              <p className="mb-5 text-[36px] lg:text-[48px] font-bold leading-none tracking-tight text-[#9D7C64]/20 transition-colors duration-300 group-hover:text-[#9D7C64]/40">
                 {step.number}
               </p>
 

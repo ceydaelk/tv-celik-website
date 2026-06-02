@@ -9,10 +9,16 @@ export interface GalleryImage {
   caption: string;
 }
 
+// Minimum horizontal distance (px) to count as an intentional swipe
+const SWIPE_THRESHOLD = 40;
+
 export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [visible,   setVisible]   = useState(true);
   const stripRef = useRef<HTMLDivElement>(null);
+
+  // Tracks the pointer-down position; stored in a ref to avoid re-renders during drag
+  const drag = useRef<{ startX: number; active: boolean }>({ startX: 0, active: false });
 
   const goTo = useCallback((idx: number) => {
     if (idx === activeIdx) return;
@@ -22,6 +28,26 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
 
   const prev = useCallback(() => goTo((activeIdx - 1 + images.length) % images.length), [activeIdx, images.length, goTo]);
   const next = useCallback(() => goTo((activeIdx + 1)                 % images.length), [activeIdx, images.length, goTo]);
+
+  // ── Pointer-based swipe (touch + mouse) ─────────────────────────────────
+  function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    drag.current = { startX: e.clientX, active: true };
+    // Capture so pointerup fires here even if the finger slides off the element
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    drag.current.active = false;
+    if (Math.abs(dx) < SWIPE_THRESHOLD) return;
+    if (dx < 0) next(); else prev();
+  }
+
+  function onPointerCancel() {
+    drag.current.active = false;
+  }
+  // ────────────────────────────────────────────────────────────────────────
 
   useEffect(() => {
     const strip = stripRef.current;
@@ -33,6 +59,7 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
   if (images.length === 0) return null;
 
   const active = images[activeIdx];
+  const hasMany = images.length > 1;
 
   return (
     <div>
@@ -41,8 +68,17 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
           Natural proportions only. No maxHeight cap, no objectFit, no forced
           aspect ratio. The image renders at its own width/height ratio inside
           the column. Frame images show their full frame without cropping.
+
+          touchAction:"pan-y" — lets the browser handle vertical scroll normally
+          while we capture horizontal swipes ourselves.
       ────────────────────────────────────────────────────────────────────── */}
-      <div className="relative w-full">
+      <div
+        className="relative w-full select-none"
+        style={{ touchAction: "pan-y" }}
+        onPointerDown={hasMany ? onPointerDown : undefined}
+        onPointerUp={hasMany ? onPointerUp : undefined}
+        onPointerCancel={hasMany ? onPointerCancel : undefined}
+      >
         <div style={{ opacity: visible ? 1 : 0, transition: "opacity 0.13s ease" }}>
           <Image
             src={active.url}
@@ -51,10 +87,11 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
             height={0}
             sizes="(max-width: 1024px) 100vw, 65vw"
             style={{ display: "block", width: "100%", height: "auto" }}
+            draggable={false}
           />
         </div>
 
-        {images.length > 1 && (
+        {hasMany && (
           <>
             <button
               onClick={prev}
@@ -73,7 +110,7 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
           </>
         )}
 
-        {images.length > 1 && (
+        {hasMany && (
           <span className="absolute bottom-2 right-2.5 z-10 text-[11px] text-white font-mono tabular-nums select-none bg-black/35 px-1.5 py-0.5">
             {activeIdx + 1} / {images.length}
           </span>
@@ -85,7 +122,7 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
           No object-cover, no forced square box, no cropping.
           Active state: thin accent outline only — no dimming on inactive.
       ────────────────────────────────────────────────────────────────────── */}
-      {images.length > 1 && (
+      {hasMany && (
         <div
           ref={stripRef}
           className="mt-2 flex gap-1.5 overflow-x-auto focus:outline-none"
@@ -110,6 +147,7 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
                 height={0}
                 sizes="200px"
                 style={{ display: "block", height: 80, width: "auto" }}
+                draggable={false}
               />
             </button>
           ))}

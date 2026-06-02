@@ -6,6 +6,7 @@ import { ArrowLeft, Plus, X, ChevronUp, ChevronDown, RotateCcw } from "lucide-re
 import type { ServiceSection, GalleryItem } from "@/types/content";
 import { getMergedSubcategoryAdmin, saveSubcategory } from "@/lib/firestore/services";
 import { CATEGORY_FEATURES, GENERIC_FEATURES, CATEGORY_IMAGES } from "@/data/services";
+import { getServiceCoverImage } from "@/lib/localServiceImages";
 import ImageUploadField from "@/components/admin/ImageUploadField";
 import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus";
 
@@ -203,7 +204,7 @@ export default function ServiceDetailForm({ slug }: { slug: string }) {
             value={form.imageUrl}
             onChange={(v) => upd("imageUrl", v)}
             storagePath={`services/${form.categorySlug}`}
-            fallbackUrl={CATEGORY_IMAGES[form.categorySlug]}
+            fallbackUrl={getServiceCoverImage(form.slug) ?? CATEGORY_IMAGES[form.categorySlug]}
           />
         </div>
       </section>

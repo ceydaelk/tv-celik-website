@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CATEGORIES, CATEGORY_IMAGES } from "@/data/services";
+import { CATEGORIES } from "@/data/services";
 import { getSubcategories } from "@/lib/firestore/services";
+import { getServiceCoverImage } from "@/lib/localServiceImages";
 
 interface RelatedServicesProps {
   currentSlug: string;
@@ -56,9 +57,10 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {siblings.map((s) => {
-            const imgSrc = ((s as { imageUrl?: string }).imageUrl?.startsWith("http")
-              ? (s as { imageUrl?: string }).imageUrl
-              : CATEGORY_IMAGES[categorySlug]) ?? "";
+            const imgSrc =
+              (s as { imageUrl?: string }).imageUrl?.startsWith("http")
+                ? (s as { imageUrl?: string }).imageUrl!
+                : getServiceCoverImage(s.slug);
 
             return (
               <Link

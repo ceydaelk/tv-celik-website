@@ -2,7 +2,11 @@
 
 import { MessageCircle } from "lucide-react";
 
-export function WhatsAppFAB() {
+interface WhatsAppFABProps {
+  phone?: string;
+}
+
+export function WhatsAppFAB({ phone = "90XXXXXXXXXX" }: WhatsAppFABProps) {
   return (
     <div className="group fixed bottom-6 right-6 z-50">
       {/* Tooltip */}
@@ -13,13 +17,13 @@ export function WhatsAppFAB() {
         Hemen Yazın
       </span>
 
-      {/* FAB — dark teal base, fills to recognizable green on hover */}
+      {/* FAB — deep emerald base with subtle ring, brightens on hover */}
       <a
-        href="https://wa.me/90XXXXXXXXXX?text=Merhaba%2C%20bilgi%20almak%20istiyorum."
+        href={`https://wa.me/${phone}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="WhatsApp ile İletişime Geçin"
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#128C7E] shadow-lg transition-all duration-300 ease-out hover:bg-[#25D366] hover:shadow-xl hover:scale-105 active:scale-95 focus:outline-2 focus:outline-[#25D366]"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#064e3b] ring-1 ring-[#059669]/40 shadow-[0_4px_20px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.06)] transition-all duration-300 ease-out hover:bg-[#065f46] hover:ring-[#10b981]/55 hover:shadow-[0_6px_24px_rgba(5,150,105,0.18),0_2px_8px_rgba(0,0,0,0.45)] hover:scale-105 active:scale-95 focus:outline-none"
       >
         <MessageCircle size={28} className="text-white" />
       </a>

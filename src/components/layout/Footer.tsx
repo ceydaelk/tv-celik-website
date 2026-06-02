@@ -122,7 +122,7 @@ export default async function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 flex items-center justify-between border-t border-white/[0.07] pt-7">
           <p className="text-[11px] font-normal text-white/25">
-            © 2024 TV Çelik A.Ş. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} TV Çelik A.Ş. Tüm hakları saklıdır.
           </p>
         </div>
       </div>

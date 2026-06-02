@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight, Star } from "lucide-react";
+import { getServiceCoverImage, getCategoryCoverImage } from "@/lib/localServiceImages";
 
 interface ServiceCardProps {
   slug: string;
@@ -16,12 +17,8 @@ const CATEGORY_IMAGES: Record<string, string> = {
     "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=75&auto=format&fit=crop",
   "hafif-celik-yapilar":
     "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=75&auto=format&fit=crop",
-  "konteyner-sistemleri":
-    "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=75&auto=format&fit=crop",
-  "endustriyel-celik-yapilar":
-    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&q=75&auto=format&fit=crop",
-  "yapisal-bilesenler":
-    "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=900&q=75&auto=format&fit=crop",
+  // konteyner-sistemleri, endustriyel-celik-yapilar, yapisal-bilesenler intentionally omitted
+  // until proper photos are available — cards fall back to CATEGORY_BG gradient
 };
 
 const CATEGORY_BG: Record<string, string> = {
@@ -49,16 +46,21 @@ export default function ServiceCard({
   isFoldable,
 }: ServiceCardProps) {
   const bg = CATEGORY_BG[categorySlug] ?? DEFAULT_BG;
-  // Firestore'dan gelen gerçek URL varsa onu kullan, yoksa kategori görseline dön
+  // Priority: Firestore URL → service cover → (category cover only for homepage) → Unsplash
+  // getCategoryCoverImage is intentionally excluded from the listing variant — it returns
+  // the tek-katli image for the whole prefabrik-yapilar category, which must not bleed
+  // onto unrelated individual service cards.
   const imgSrc = imagePlaceholder?.startsWith("http")
     ? imagePlaceholder
-    : CATEGORY_IMAGES[categorySlug];
+    : (getServiceCoverImage(slug)
+       ?? (variant === "homepage" ? getCategoryCoverImage(categorySlug) : undefined)
+       ?? CATEGORY_IMAGES[categorySlug]);
 
   if (variant === "homepage") {
     return (
       <a
         href={`/hizmetler/${slug}`}
-        className="group relative block h-[360px] overflow-hidden rounded-xl border border-white/5 shadow-md shadow-black/30 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/50 focus:outline-2 focus:outline-[#9D7C64]"
+        className="group relative block h-[260px] sm:h-[310px] lg:h-[360px] overflow-hidden rounded-xl border border-white/5 shadow-md shadow-black/30 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/50 focus:outline-2 focus:outline-[#9D7C64]"
       >
         {/* Gradient base */}
         <div className="absolute inset-0" style={{ background: bg }} />
@@ -69,7 +71,7 @@ export default function ServiceCard({
             src={imgSrc}
             alt=""
             fill
-            className="object-cover opacity-55 transition-transform duration-700 ease-out group-hover:scale-110"
+            className="object-cover opacity-55 scale-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
           />
         )}
@@ -111,7 +113,7 @@ export default function ServiceCard({
             src={imgSrc}
             alt=""
             fill
-            className="object-cover opacity-55 transition-transform duration-700 ease-out group-hover:scale-110"
+            className="object-cover opacity-55 scale-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
           />
         )}

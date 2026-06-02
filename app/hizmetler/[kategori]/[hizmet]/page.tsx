@@ -6,6 +6,7 @@ import { CATEGORIES, SERVICES_MAP, CATEGORY_FEATURES, GENERIC_FEATURES } from "@
 import { CATEGORY_USE_CASES, GENERIC_USE_CASES } from "@/data/serviceUseCases";
 import { getSubcategoryBySlug } from "@/lib/firestore/services";
 import { mergeSubcategory } from "@/lib/content/mergeSubcategory";
+import { getCompanyData } from "@/lib/firestore/company";
 import { getLocalServiceImages } from "@/lib/localServiceImages";
 import BreadcrumbNav from "@/components/common/BreadcrumbNav";
 import FoldableBadge from "@/components/common/FoldableBadge";
@@ -55,9 +56,14 @@ export default async function HizmetDetayPage({
 }) {
   const { kategori, hizmet } = await params;
 
-  const fsSub = await getSubcategoryBySlug(hizmet);
+  const [fsSub, company] = await Promise.all([
+    getSubcategoryBySlug(hizmet),
+    getCompanyData(),
+  ]);
   const hcSvc = SERVICES_MAP[hizmet]?.categorySlug === kategori ? SERVICES_MAP[hizmet] : null;
   if (!fsSub && !hcSvc) notFound();
+
+  const whatsappPhone = company.whatsapp ?? "90XXXXXXXXXX";
 
   const category   = CATEGORIES.find((c) => c.slug === kategori) ?? { header: kategori, slug: kategori, subcategories: [], description: "" };
   const isFoldable = FOLDABLE_SLUGS.includes(hizmet as typeof FOLDABLE_SLUGS[number]);
@@ -159,7 +165,7 @@ export default async function HizmetDetayPage({
             {/* Use cases */}
             <div>
               <p className={LABEL}>Nerelerde Kullanılır?</p>
-              <div className="mt-4 grid grid-cols-2 gap-x-8">
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 sm:gap-y-0">
                 {[useCases.group1, useCases.group2].map((group) => (
                   <div key={group.heading}>
                     <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#9D7C64] mb-3">
@@ -243,7 +249,7 @@ export default async function HizmetDetayPage({
                 Bu hizmet hakkında uzmanlarımıza doğrudan yazın.
               </p>
               <a
-                href={`https://wa.me/90XXXXXXXXXX?text=${encodeURIComponent(whatsappMsg)}`}
+                href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMsg)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-[13px] font-bold text-white bg-[#25D366] hover:bg-[#1da851] transition-colors"
@@ -270,12 +276,11 @@ export default async function HizmetDetayPage({
             Çalışma Sürecimiz
           </p>
           <h2 className="text-xl font-bold text-[#1C1C1C] mb-10">Üretimden Teslime</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-0">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-0">
             {PROCESS_STEPS.map((step, i) => (
               <div
                 key={step.n}
-                className="border-t-2 border-[#EAEAE6] pr-8"
-                style={{ paddingTop: STEP_PT[i] }}
+                className={`border-t-2 border-[#EAEAE6] pr-8 pt-5 lg:[padding-top:${STEP_PT[i]}px]`}
               >
                 <p className="text-[40px] font-bold leading-none tabular-nums mb-4"
                    style={{ color: "rgba(157,124,100,0.18)" }}>

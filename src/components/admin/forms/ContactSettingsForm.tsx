@@ -2,16 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Plus, X } from "lucide-react";
-import type { CompanyData, SiteSettings } from "@/types/content";
+import type { CompanyData } from "@/types/content";
 import { getCompanyData, saveCompanyData } from "@/lib/firestore/company";
-import { getSiteSettings, saveSiteSettings } from "@/lib/firestore/settings";
-import ImageUploadField from "@/components/admin/ImageUploadField";
 import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus";
 
 type ContactFields = Pick<CompanyData, "phone" | "email" | "whatsapp" | "addresses">;
-type SettingsFields = Pick<SiteSettings, "footerTagline" | "footerDescription" | "seoTitle" | "seoDescription" | "logoUrl">;
 
-const CONTACT_DEFAULTS: ContactFields = {
+const DEFAULTS: ContactFields = {
   phone:    "+90 XXX XXX XX XX",
   email:    "info@tvcelik.com",
   whatsapp: "90XXXXXXXXXX",
@@ -22,38 +19,21 @@ const CONTACT_DEFAULTS: ContactFields = {
   ],
 };
 
-const SETTINGS_DEFAULTS: SettingsFields = {
-  footerTagline:     "Çelikten Güç, Yapıdan Güven",
-  footerDescription: "30 yılı aşkın deneyimle prefabrik yapı, hafif çelik, konteyner ve endüstriyel çelik yapı sistemleri üretimi.",
-  seoTitle:          "TV Çelik A.Ş. — Prefabrik ve Çelik Yapı Sistemleri",
-  seoDescription:    "30 yılı aşkın deneyimle prefabrik yapı, hafif çelik, konteyner ve endüstriyel çelik yapı sistemleri üretimi.",
-  logoUrl:           "",
-};
-
 export default function ContactSettingsForm() {
-  const [contact, setContact]         = useState<ContactFields>(CONTACT_DEFAULTS);
-  const [settings, setSettings]       = useState<SettingsFields>(SETTINGS_DEFAULTS);
-  const [loading, setLoading]         = useState(true);
-  const [status, setStatus]           = useState<SaveStatusValue>("idle");
-  const [errMsg, setErrMsg]           = useState("");
+  const [contact, setContact] = useState<ContactFields>(DEFAULTS);
+  const [loading, setLoading] = useState(true);
+  const [status, setStatus]   = useState<SaveStatusValue>("idle");
+  const [errMsg, setErrMsg]   = useState("");
 
   useEffect(() => {
-    Promise.all([getCompanyData(), getSiteSettings()])
-      .then(([cd, sd]) => {
+    getCompanyData()
+      .then((cd) => {
         setContact((p) => ({
           ...p,
           ...(cd.phone     != null ? { phone:     cd.phone     } : {}),
           ...(cd.email     != null ? { email:     cd.email     } : {}),
           ...(cd.whatsapp  != null ? { whatsapp:  cd.whatsapp  } : {}),
           ...(cd.addresses?.length ? { addresses: cd.addresses } : {}),
-        }));
-        setSettings((p) => ({
-          ...p,
-          ...(sd.footerTagline     != null ? { footerTagline:     sd.footerTagline     } : {}),
-          ...(sd.footerDescription != null ? { footerDescription: sd.footerDescription } : {}),
-          ...(sd.seoTitle          != null ? { seoTitle:          sd.seoTitle          } : {}),
-          ...(sd.seoDescription    != null ? { seoDescription:    sd.seoDescription    } : {}),
-          ...(sd.logoUrl           != null ? { logoUrl:           sd.logoUrl           } : {}),
         }));
       })
       .catch(() => {})
@@ -62,9 +42,6 @@ export default function ContactSettingsForm() {
 
   function setC<K extends keyof ContactFields>(key: K, val: ContactFields[K]) {
     setContact((p) => ({ ...p, [key]: val })); setStatus("idle");
-  }
-  function setS<K extends keyof SettingsFields>(key: K, val: SettingsFields[K]) {
-    setSettings((p) => ({ ...p, [key]: val })); setStatus("idle");
   }
 
   function setAddressText(i: number, text: string) {
@@ -83,10 +60,7 @@ export default function ContactSettingsForm() {
   async function handleSave() {
     setStatus("saving"); setErrMsg("");
     try {
-      await Promise.all([
-        saveCompanyData(contact),       // { merge: true } — about/mission alanlarına dokunmaz
-        saveSiteSettings(settings),     // { merge: true }
-      ]);
+      await saveCompanyData(contact);
       setStatus("success");
     } catch (e) {
       setErrMsg("Kayıt başarısız: " + (e instanceof Error ? e.message : String(e)));
@@ -103,7 +77,8 @@ export default function ContactSettingsForm() {
   return (
     <div className="p-6 max-w-xl space-y-7">
       <div className="border-b border-[#DDDBD6] pb-3">
-        <h1 className="text-lg font-bold text-[#1C1C1C]">İletişim ve Ayarlar</h1>
+        <h1 className="text-lg font-bold text-[#1C1C1C]">İletişim</h1>
+        <p className="text-sm text-[#8A8680] mt-0.5">Telefon, e-posta, WhatsApp ve adres bilgileri.</p>
       </div>
 
       {/* ── İletişim Bilgileri ───────────────────────────────────────────── */}
@@ -146,43 +121,6 @@ export default function ContactSettingsForm() {
           className="flex items-center gap-1 text-sm text-[#9D7C64] hover:text-[#866A56] transition-colors">
           <Plus size={13} /> Adres Ekle
         </button>
-      </section>
-
-      {/* ── Site Ayarları ────────────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className={SEC}>Site Ayarları</h2>
-
-        <div>
-          <label className={LBL}>Logo</label>
-          <ImageUploadField value={settings.logoUrl ?? ""} onChange={(v) => setS("logoUrl", v)} storagePath="branding" />
-        </div>
-
-        <div>
-          <label className={LBL}>Footer Sloganı</label>
-          <input type="text" value={settings.footerTagline} onChange={(e) => setS("footerTagline", e.target.value)} className={IN} />
-        </div>
-
-        <div>
-          <label className={LBL}>Footer Açıklaması</label>
-          <textarea rows={3} value={settings.footerDescription} onChange={(e) => setS("footerDescription", e.target.value)}
-            className={`${IN} resize-none leading-relaxed`} />
-        </div>
-      </section>
-
-      {/* ── SEO ─────────────────────────────────────────────────────────── */}
-      <section className="space-y-4">
-        <h2 className={SEC}>Arama Motoru (SEO)</h2>
-
-        <div>
-          <label className={LBL}>Site Başlığı <span className={HINT}>— tarayıcı sekmesinde görünür</span></label>
-          <input type="text" value={settings.seoTitle} onChange={(e) => setS("seoTitle", e.target.value)} className={IN} />
-        </div>
-
-        <div>
-          <label className={LBL}>Açıklama <span className={HINT}>— Google'da görünür, 160 karakter</span></label>
-          <textarea rows={3} value={settings.seoDescription} onChange={(e) => setS("seoDescription", e.target.value)}
-            className={`${IN} resize-none leading-relaxed`} />
-        </div>
       </section>
 
       {/* ── Kaydet ──────────────────────────────────────────────────────── */}

@@ -21,19 +21,19 @@ export default async function KurumsalPage() {
   return (
     <div className="bg-[#FAFAF9]">
       {/* Page header */}
-      <div className="bg-[#1C1C1C] py-16">
+      <div className="bg-[#1C1C1C] py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-sm font-normal text-[#9D7C64] uppercase tracking-widest mb-3">
             Hakkımızda
           </p>
-          <h1 className="text-4xl font-bold text-white leading-[1.1] max-w-2xl">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-[1.1] max-w-2xl">
             Kurumsal
           </h1>
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-4xl mx-auto px-6 py-10 sm:py-16">
         <div className="space-y-12">
 
           <div>
@@ -58,7 +58,7 @@ export default async function KurumsalPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 bg-[#1C1C1C] rounded-lg p-8 text-center">
+        <div className="mt-10 sm:mt-16 bg-[#1C1C1C] rounded-lg p-5 sm:p-8 text-center">
           <h2 className="text-xl font-bold text-white mb-3">Bizimle Çalışmak İster misiniz?</h2>
           <p className="text-base font-normal text-white/75 mb-6">
             Projenizi konuşmak için WhatsApp&apos;tan bize yazın.

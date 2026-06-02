@@ -3,11 +3,11 @@ import ServiceCard from "@/components/home/ServiceCard";
 
 export default function ServicesGrid() {
   return (
-    <section id="hizmetler" className="bg-[#FAFAF9] py-32">
+    <section id="hizmetler" className="bg-[#FAFAF9] py-14 sm:py-20 lg:py-32">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Section header — architectural border-left pattern */}
-        <div className="mb-16 flex items-end justify-between gap-6">
+        <div className="mb-8 sm:mb-12 lg:mb-16 flex items-end justify-between gap-6">
           <div className="border-l-2 border-[#9D7C64] pl-5">
             <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#9D7C64]">
               Ne İnşa Ediyoruz
@@ -33,7 +33,7 @@ export default function ServicesGrid() {
               categorySlug={cat.slug}
               label={cat.header}
               description={cat.subcategories[0].description}
-              imagePlaceholder={`/images/services/${cat.slug}/placeholder.jpg`}
+              imagePlaceholder=""
               variant="homepage"
             />
           ))}
