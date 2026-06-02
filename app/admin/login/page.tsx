@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
     <div className="h-full flex items-center justify-center p-4 bg-[#F7F8FA]">
       <div className="w-full max-w-sm">
 
-        {/* Başlık */}
+        {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 bg-[#1C1C1C] rounded-xl mb-4">
             <Lock size={20} className="text-[#9D7C64]" />
