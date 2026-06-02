@@ -7,6 +7,10 @@ import { auth } from "@/lib/firebase/auth";
 import { Lock, Mail, Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginPage() {
+  // TODO: remove after Firebase Auth debug
+  const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+  console.log("[debug] FIREBASE_API_KEY prefix:", apiKey ? apiKey.slice(0, 8) + "…" : "undefined");
+
   const [email, setEmail]             = useState("");
   const [password, setPassword]       = useState("");
   const [showPassword, setShowPw]     = useState(false);
