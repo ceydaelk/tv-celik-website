@@ -23,7 +23,7 @@ export default async function Home() {
         eyebrow={data.heroEyebrow}
         title={data.heroTitle}
         subtitle={data.heroSubtitle}
-        imageUrl={data.heroImageUrl || "/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (10).jpeg"}
+        imageUrl="/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (10).jpeg"
         whatsappNumber={whatsappNumber}
         whatsappText={data.heroWhatsappText}
         secondaryText={data.heroSecondaryText}
