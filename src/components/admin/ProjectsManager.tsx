@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback } from "react";
 import { Plus, X, Pencil, Trash2 } from "lucide-react";
 import type { Project } from "@/types/content";
 import { getProjectsAdmin, addProject, updateProject, deleteProject } from "@/lib/firestore/projects";
-import ImageUploadField from "@/components/admin/ImageUploadField";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -228,10 +227,16 @@ export default function ProjectsManager() {
                           onChange={(e) => updRow(project.id, { description: e.target.value })}
                           className={`${IN} resize-none`} />
                       </FL>
-                      <FL label="Proje Görseli">
-                        <ImageUploadField value={rf.imageUrl}
-                          onChange={(url) => updRow(project.id, { imageUrl: url })}
-                          storagePath="projects" />
+                      <FL label="Proje Görseli URL">
+                        <div className="space-y-2">
+                          {rf.imageUrl?.startsWith("http") && (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={rf.imageUrl} alt="" className="w-20 h-14 object-cover rounded-md border border-[#DDDBD6]" />
+                          )}
+                          <input type="text" value={rf.imageUrl}
+                            onChange={(e) => updRow(project.id, { imageUrl: e.target.value })}
+                            placeholder="https://..." className={IN} />
+                        </div>
                       </FL>
                       <div className="flex items-center gap-2 justify-end">
                         <button onClick={() => saveRow(project.id)} disabled={rf.saving}
@@ -285,10 +290,16 @@ export default function ProjectsManager() {
                   onChange={(e) => setAddForm((p) => ({ ...p, description: e.target.value }))}
                   className={`${IN} resize-none`} />
               </FL>
-              <FL label="Proje Görseli">
-                <ImageUploadField value={addForm.imageUrl}
-                  onChange={(url) => setAddForm((p) => ({ ...p, imageUrl: url }))}
-                  storagePath="projects" />
+              <FL label="Proje Görseli URL">
+                <div className="space-y-2">
+                  {addForm.imageUrl?.startsWith("http") && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={addForm.imageUrl} alt="" className="w-20 h-14 object-cover rounded-md border border-[#DDDBD6]" />
+                  )}
+                  <input type="text" value={addForm.imageUrl}
+                    onChange={(e) => setAddForm((p) => ({ ...p, imageUrl: e.target.value }))}
+                    placeholder="https://..." className={IN} />
+                </div>
               </FL>
             </div>
 

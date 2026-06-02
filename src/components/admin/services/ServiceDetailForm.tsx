@@ -5,9 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Plus, X, ChevronUp, ChevronDown, RotateCcw } from "lucide-react";
 import type { ServiceSection, GalleryItem } from "@/types/content";
 import { getMergedSubcategoryAdmin, saveSubcategory } from "@/lib/firestore/services";
-import { CATEGORY_FEATURES, GENERIC_FEATURES, CATEGORY_IMAGES } from "@/data/services";
-import { getServiceCoverImage } from "@/lib/localServiceImages";
-import ImageUploadField from "@/components/admin/ImageUploadField";
+import { CATEGORY_FEATURES, GENERIC_FEATURES } from "@/data/services";
 import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus";
 
 type F = {
@@ -199,13 +197,15 @@ export default function ServiceDetailForm({ slug }: { slug: string }) {
         </div>
 
         <div>
-          <label className={LBL}>Görsel</label>
-          <ImageUploadField
-            value={form.imageUrl}
-            onChange={(v) => upd("imageUrl", v)}
-            storagePath={`services/${form.categorySlug}`}
-            fallbackUrl={getServiceCoverImage(form.slug) ?? CATEGORY_IMAGES[form.categorySlug]}
-          />
+          <label className={LBL}>Görsel URL</label>
+          <div className="space-y-2">
+            {form.imageUrl?.startsWith("http") && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={form.imageUrl} alt="" className="w-20 h-14 object-cover rounded-md border border-[#DDDBD6]" />
+            )}
+            <input type="text" value={form.imageUrl} onChange={(e) => upd("imageUrl", e.target.value)}
+              placeholder="https://..." className={IN} />
+          </div>
         </div>
       </section>
 
