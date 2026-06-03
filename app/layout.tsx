@@ -18,9 +18,24 @@ const montserrat = Montserrat({
   weight: ["700"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tvcelik.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "TV Çelik A.Ş.",
   description: "Prefabrik, hafif çelik ve konteyner yapı sistemleri",
+  openGraph: {
+    type:        "website",
+    siteName:    "TV Çelik A.Ş.",
+    title:       "TV Çelik A.Ş.",
+    description: "Prefabrik, hafif çelik ve konteyner yapı sistemleri",
+    url:         siteUrl,
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       "TV Çelik A.Ş.",
+    description: "Prefabrik, hafif çelik ve konteyner yapı sistemleri",
+  },
 };
 
 export default async function RootLayout({
