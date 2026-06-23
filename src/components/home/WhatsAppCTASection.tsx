@@ -1,10 +1,14 @@
-﻿import { MessageCircle } from "lucide-react";
+"use client";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { MessageCircle } from "lucide-react";
+import { ease } from "@/lib/motion";
 
 const D = {
   title:        "Projenizi Konuşalım",
   description:  "Prefabrik yapı, çelik sistem veya konteyner çözümü için teklif almak ister misiniz? WhatsApp'tan yazın, en kısa sürede yanıt veririz.",
   responseNote: "Ortalama yanıt süresi: 1 saat içinde",
-  whatsapp:     "905078363661",
+  whatsapp:     "905467343030",
 };
 
 interface WhatsAppCTASectionProps {
@@ -20,6 +24,9 @@ export default function WhatsAppCTASection({
   responseNote  = D.responseNote,
   whatsappNumber = D.whatsapp,
 }: WhatsAppCTASectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.25 });
+
   return (
     <section
       className="relative overflow-hidden py-14 sm:py-20 lg:py-28"
@@ -30,7 +37,13 @@ export default function WhatsAppCTASection({
       {/* Top copper hairline */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#9D7C64]/60 to-transparent" />
 
-      <div className="relative max-w-3xl mx-auto px-6 text-center">
+      <motion.div
+        ref={ref}
+        className="relative max-w-3xl mx-auto px-6 text-center"
+        initial={{ opacity: 0, y: 28 }}
+        animate={inView ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.65, ease }}
+      >
         <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[#9D7C64]">
           Ücretsiz Görüşme
         </p>
@@ -54,7 +67,7 @@ export default function WhatsAppCTASection({
         <p className="mt-6 text-xs font-normal text-white/25">
           {responseNote}
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }

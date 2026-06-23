@@ -23,3 +23,25 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
 }
+
+@keyframes hero-zoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.035); }
+}
+.hero-zoom {
+  animation: hero-zoom 14s ease-in-out forwards;
+  will-change: transform;
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-transition {
+  animation: page-in 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom       { animation: none; }
+  .page-transition { animation: none; }
+}

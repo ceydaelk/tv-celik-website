@@ -22,8 +22,9 @@ export async function generateMetadata({
   const cat = CATEGORIES.find((c) => c.slug === kategori);
   if (!cat) return { title: "Hizmetler — TV Çelik A.Ş." };
   return {
-    title: `${cat.header} — TV Çelik A.Ş.`,
+    title:       `${cat.header} — TV Çelik A.Ş.`,
     description: `TV Çelik ${cat.header} hizmetleri: ${cat.subcategories.map((s) => s.label).join(", ")}.`,
+    alternates:  { canonical: `/hizmetler/${kategori}` },
   };
 }
 

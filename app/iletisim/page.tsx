@@ -1,18 +1,20 @@
 ﻿import type { Metadata } from "next";
 import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { getCompanyData } from "@/lib/firestore/company";
+import ScrollReveal from "@/components/common/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "İletişim — TV Çelik A.Ş.",
   description: "TV Çelik A.Ş. ile iletişime geçin. WhatsApp, telefon veya e-posta yoluyla ulaşabilirsiniz.",
+  alternates: { canonical: "/iletisim" },
 };
 
 export default async function IletisimPage() {
   const company = await getCompanyData();
 
-  const phone    = company.phone    ?? "+90 507 836 36 61";
+  const phone    = company.phone    ?? "+90 546 734 30 30";
   const email    = company.email    ?? "info@tvcelik.com";
-  const whatsapp = company.whatsapp ?? "905078363661";
+  const whatsapp = company.whatsapp ?? "905467343030";
 
   const merkez   = company.addresses?.find((a) => a.type === "Merkez")?.text
     ?? "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul";
@@ -38,26 +40,29 @@ export default async function IletisimPage() {
       <div className="max-w-4xl mx-auto px-6 py-10 sm:py-16">
 
         {/* Primary WhatsApp CTA */}
-        <div className="bg-[#1C1C1C] rounded-lg p-5 sm:p-8 text-center mb-8 sm:mb-12">
-          <h2 className="text-xl font-bold text-white mb-3">
-            En Hızlı Yol: WhatsApp
-          </h2>
-          <p className="text-base font-normal text-white/75 mb-6 max-w-md mx-auto">
-            Projeniz hakkında bilgi almak için doğrudan WhatsApp&apos;tan yazın.
-            En kısa sürede yanıt veririz.
-          </p>
-          <a
-            href={`https://wa.me/${whatsapp}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 sm:px-8 sm:py-4 text-base font-bold text-white transition-colors duration-150 hover:bg-[#1da851] active:scale-95 focus:outline-2 focus:outline-white"
-          >
-            <MessageCircle size={20} />
-            WhatsApp&apos;tan Yazın
-          </a>
-        </div>
+        <ScrollReveal>
+          <div className="bg-[#1C1C1C] rounded-lg p-5 sm:p-8 text-center mb-8 sm:mb-12">
+            <h2 className="text-xl font-bold text-white mb-3">
+              En Hızlı Yol: WhatsApp
+            </h2>
+            <p className="text-base font-normal text-white/75 mb-6 max-w-md mx-auto">
+              Projeniz hakkında bilgi almak için doğrudan WhatsApp&apos;tan yazın.
+              En kısa sürede yanıt veririz.
+            </p>
+            <a
+              href={`https://wa.me/${whatsapp}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 sm:px-8 sm:py-4 text-base font-bold text-white transition-colors duration-150 hover:bg-[#1da851] active:scale-95 focus:outline-2 focus:outline-white"
+            >
+              <MessageCircle size={20} />
+              WhatsApp&apos;tan Yazın
+            </a>
+          </div>
+        </ScrollReveal>
 
         {/* Contact details */}
+        <ScrollReveal delay={0.1}>
         <div className="border border-[#DDDBD6] rounded-lg divide-y divide-[#DDDBD6]">
           <div className="flex items-start gap-4 p-6">
             <Phone size={20} className="text-[#9D7C64] mt-0.5 flex-shrink-0" />
@@ -96,6 +101,7 @@ export default async function IletisimPage() {
             </div>
           </div>
         </div>
+        </ScrollReveal>
 
       </div>
     </div>

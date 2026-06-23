@@ -1,5 +1,8 @@
-﻿import Image from "next/image";
+"use client";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { MessageCircle, ChevronDown } from "lucide-react";
+import { ease } from "@/lib/motion";
 
 // Mevcut hardcoded değerler — Firestore boşken bunlar kullanılır
 const D = {
@@ -7,7 +10,7 @@ const D = {
   title:         "Çeliğin Gücüyle\nGeleceği İnşa Ediyoruz",
   subtitle:      "Hafif çelik, prefabrik, konteyner ve endüstriyel yapı sistemlerinde güçlü üretim çözümleri.",
   imageUrl:      "/assets/services/ucgen-bina-hafif-celik/ucgen-bina-hafif-celik (10).jpeg",
-  whatsapp:      "905078363661",
+  whatsapp:      "905467343030",
   whatsappText:  "WhatsApp'tan Yazın",
   secondaryText: "Hizmetlerimizi Keşfedin",
 };
@@ -21,6 +24,17 @@ interface HeroSectionProps {
   whatsappText?:  string;
   secondaryText?: string;
 }
+
+// Stagger container — fires once on mount (hero is always above the fold)
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.15 } },
+};
+
+const itemVariants = {
+  hidden:   { opacity: 0, y: 20 },
+  visible:  { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+};
 
 export default function HeroSection({
   eyebrow       = D.eyebrow,
@@ -43,7 +57,7 @@ export default function HeroSection({
         alt=""
         fill
         priority
-        className="object-cover object-[60%_center]"
+        className="object-cover object-[60%_center] hero-zoom"
         sizes="100vw"
       />
 
@@ -78,33 +92,49 @@ export default function HeroSection({
 
       {/* Content — pulled left: smaller left padding than right */}
       <div className="relative z-10 w-full max-w-7xl mx-auto pl-4 pr-6 sm:pl-5 sm:pr-8 lg:pl-6 lg:pr-10 py-20 sm:py-28 md:py-44">
-        <div className="max-w-[520px]">
+
+        {/* Stagger container — all children animate in sequence on mount */}
+        <motion.div
+          className="max-w-[520px]"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
 
           {/* Eyebrow */}
-          <div className="mb-5 sm:mb-8 inline-flex items-center gap-3">
+          <motion.div className="mb-5 sm:mb-8 inline-flex items-center gap-3" variants={itemVariants}>
             <span className="h-px w-10 bg-[#9D7C64]" />
             <span className="text-[11px] font-bold uppercase tracking-[0.30em] text-[#9D7C64]">
               {eyebrow}
             </span>
-          </div>
+          </motion.div>
 
           {/* Headline — "\n" satır sonu olarak render edilir */}
-          <h1 className="mb-5 sm:mb-8 text-[33px] sm:text-[46px] lg:text-[54px] font-bold leading-[1.05] tracking-tight text-white">
+          <motion.h1
+            className="mb-5 sm:mb-8 text-[33px] sm:text-[46px] lg:text-[54px] font-bold leading-[1.05] tracking-tight text-white"
+            variants={itemVariants}
+          >
             {titleLines.map((line, i) => (
               <span key={i}>
                 {line}
                 {i < titleLines.length - 1 && <br />}
               </span>
             ))}
-          </h1>
+          </motion.h1>
 
           {/* Subheadline */}
-          <p className="mb-8 sm:mb-12 max-w-md text-base sm:text-lg font-normal leading-relaxed text-white/55">
+          <motion.p
+            className="mb-8 sm:mb-12 max-w-md text-base sm:text-lg font-normal leading-relaxed text-white/55"
+            variants={itemVariants}
+          >
             {subtitle}
-          </p>
+          </motion.p>
 
           {/* CTAs */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+          <motion.div
+            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
+            variants={itemVariants}
+          >
             <a
               href={`https://wa.me/${whatsappNumber}?text=Merhaba%2C%20bilgi%20almak%20istiyorum.`}
               target="_blank"
@@ -123,9 +153,9 @@ export default function HeroSection({
               {secondaryText}
               <ChevronDown size={18} />
             </a>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

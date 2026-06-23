@@ -10,12 +10,13 @@ import { getCompanyData } from "@/lib/firestore/company";
 export const metadata: Metadata = {
   title: "TV Çelik A.Ş. — Prefabrik ve Çelik Yapı Sistemleri",
   description: "Türkiye'nin önde gelen prefabrik, hafif çelik ve konteyner yapı üreticisi.",
+  alternates: { canonical: "/" },
 };
 
 export default async function Home() {
   const [data, company] = await Promise.all([getHomeContent(), getCompanyData()]);
   // company.whatsapp is the single source of truth for WhatsApp across the site
-  const whatsappNumber = (company.whatsapp as string | undefined) ?? "905078363661";
+  const whatsappNumber = (company.whatsapp as string | undefined) ?? "905467343030";
 
   return (
     <>

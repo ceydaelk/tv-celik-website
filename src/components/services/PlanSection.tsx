@@ -91,7 +91,7 @@ export default function PlanSection({ sections }: Props) {
           </button>
           <Image
             src={lightboxUrl}
-            alt=""
+            alt={sections.find((s) => s.imageUrl === lightboxUrl)?.title || "Plan görseli"}
             width={0}
             height={0}
             sizes="100vw"

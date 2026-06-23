@@ -2,7 +2,9 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
+import Lightbox from "@/components/common/Lightbox";
 
 export interface GalleryImage {
   url:     string;
@@ -15,6 +17,7 @@ const SWIPE_THRESHOLD = 40;
 export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const [visible,   setVisible]   = useState(true);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
 
   // Tracks the pointer-down position; stored in a ref to avoid re-renders during drag
@@ -73,7 +76,7 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
           while we capture horizontal swipes ourselves.
       ────────────────────────────────────────────────────────────────────── */}
       <div
-        className="relative w-full select-none"
+        className="relative w-full select-none group/main"
         style={{ touchAction: "pan-y" }}
         onPointerDown={hasMany ? onPointerDown : undefined}
         onPointerUp={hasMany ? onPointerUp : undefined}
@@ -90,6 +93,15 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
             draggable={false}
           />
         </div>
+
+        {/* Expand to lightbox — appears on hover */}
+        <button
+          onClick={() => setLightboxOpen(true)}
+          aria-label="Görseli büyüt"
+          className="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded bg-black/35 text-white/70 opacity-0 transition-opacity duration-200 hover:bg-black/55 hover:text-white group-hover/main:opacity-100 focus:opacity-100 focus:outline-none"
+        >
+          <Expand size={14} />
+        </button>
 
         {hasMany && (
           <>
@@ -157,6 +169,18 @@ export default function ServiceGallery({ images }: { images: GalleryImage[] }) {
       {active.caption && (
         <p className="mt-1.5 text-[11px] text-[#8A8680] leading-snug">{active.caption}</p>
       )}
+
+      {/* ── Full-screen lightbox ─────────────────────────────────────────── */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <Lightbox
+            key="lightbox"
+            images={images}
+            startIdx={activeIdx}
+            onClose={() => setLightboxOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
     </div>
   );

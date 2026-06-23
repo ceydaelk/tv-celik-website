@@ -26,9 +26,9 @@ export default async function Footer() {
   // Firestore'dan iletişim bilgilerini oku — hata veya boşsa fallback değerler kullanılır
   const company = await getCompanyData();
 
-  const phone    = company.phone    ?? "+90 507 836 36 61";
+  const phone    = company.phone    ?? "+90 546 734 30 30";
   const email    = company.email    ?? "info@tvcelik.com";
-  const whatsapp = company.whatsapp ?? "905078363661";
+  const whatsapp = company.whatsapp ?? "905467343030";
   const address  = company.addresses?.find((a) => a.type === "Merkez")?.text
     ?? "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul";
 

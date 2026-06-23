@@ -43,9 +43,11 @@ export async function generateMetadata({
   const { hizmet } = await params;
   const fsSub   = await getSubcategoryBySlug(hizmet);
   const service = fsSub ?? SERVICES_MAP[hizmet];
+  const { kategori } = await params;
   return {
     title:       fsSub?.seoTitle       || (service ? `${service.label} — TV Çelik A.Ş.` : "Hizmet — TV Çelik A.Ş."),
     description: fsSub?.seoDescription || service?.description,
+    alternates:  { canonical: `/hizmetler/${kategori}/${hizmet}` },
   };
 }
 
@@ -63,7 +65,7 @@ export default async function HizmetDetayPage({
   const hcSvc = SERVICES_MAP[hizmet]?.categorySlug === kategori ? SERVICES_MAP[hizmet] : null;
   if (!fsSub && !hcSvc) notFound();
 
-  const whatsappPhone = company.whatsapp ?? "905078363661";
+  const whatsappPhone = company.whatsapp ?? "905467343030";
 
   const category   = CATEGORIES.find((c) => c.slug === kategori) ?? { header: kategori, slug: kategori, subcategories: [], description: "" };
   const isFoldable = FOLDABLE_SLUGS.includes(hizmet as typeof FOLDABLE_SLUGS[number]);

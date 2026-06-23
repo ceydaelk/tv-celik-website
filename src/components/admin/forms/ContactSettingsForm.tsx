@@ -9,9 +9,9 @@ import SaveStatus, { type SaveStatusValue } from "@/components/admin/SaveStatus"
 type ContactFields = Pick<CompanyData, "phone" | "email" | "whatsapp" | "addresses">;
 
 const DEFAULTS: ContactFields = {
-  phone:    "+90 507 836 36 61",
+  phone:    "+90 546 734 30 30",
   email:    "info@tvcelik.com",
-  whatsapp: "905078363661",
+  whatsapp: "905467343030",
   addresses: [
     { type: "Merkez",   text: "Güzelyalı Mh. Muştu Sk Kılıçlar Apt: NO:6/1 Pendik / İstanbul" },
     { type: "Showroom", text: "Kargalı Hanbaba Mh. Sakarya Cd. No:336/A Hendek / Sakarya" },

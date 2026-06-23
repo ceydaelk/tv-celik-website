@@ -56,7 +56,7 @@ export default function ServiceCard({
         {imgSrc && (
           <Image
             src={imgSrc}
-            alt=""
+            alt={label}
             fill
             className="object-cover opacity-55 scale-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
@@ -98,7 +98,7 @@ export default function ServiceCard({
         {imgSrc && (
           <Image
             src={imgSrc}
-            alt=""
+            alt={label}
             fill
             className="object-cover opacity-55 scale-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"

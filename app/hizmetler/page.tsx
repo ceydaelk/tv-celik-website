@@ -7,6 +7,7 @@ import BreadcrumbNav from "@/components/common/BreadcrumbNav";
 export const metadata: Metadata = {
   title: "Hizmetlerimiz — TV Çelik A.Ş.",
   description: "Prefabrik yapılar, hafif çelik sistemler, konteyner çözümleri ve daha fazlası.",
+  alternates: { canonical: "/hizmetler" },
 };
 
 const FOLDABLE_SLUGS = ["katlanir-tasinabilir", "katlanir-konteyner"] as const;

@@ -6,7 +6,7 @@ interface WhatsAppFABProps {
   phone?: string;
 }
 
-export function WhatsAppFAB({ phone = "905078363661" }: WhatsAppFABProps) {
+export function WhatsAppFAB({ phone = "905467343030" }: WhatsAppFABProps) {
   return (
     <div className="group fixed bottom-6 right-6 z-50">
       {/* Tooltip */}

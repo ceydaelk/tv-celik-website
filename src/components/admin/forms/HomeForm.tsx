@@ -11,7 +11,7 @@ const DEFAULTS: HomePageData = {
   heroTitle:         "Çeliğin Gücüyle\nGeleceği İnşa Ediyoruz",
   heroSubtitle:      "Hafif çelik, prefabrik, konteyner ve endüstriyel yapı sistemlerinde güçlü üretim çözümleri.",
   heroImageUrl:      "",
-  whatsappNumber:    "905078363661",
+  whatsappNumber:    "905467343030",
   heroWhatsappText:  "WhatsApp'tan Yazın",
   heroSecondaryText: "Hizmetlerimizi Keşfedin",
   stats: [
