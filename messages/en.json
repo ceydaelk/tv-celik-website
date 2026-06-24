@@ -1,0 +1,191 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "corporate": "Corporate",
+    "contact": "Contact",
+    "whatsapp": "Contact via WhatsApp",
+    "openMenu": "Open Menu",
+    "closeMenu": "Close Menu",
+    "expandServices": "Expand Services",
+    "viewAllServices": "View All Services →"
+  },
+  "footer": {
+    "tagline": "Power in Steel, Trust in Structure",
+    "subtitle": "Prefabricated, light steel and container building systems",
+    "pages": "Pages",
+    "services": "Services",
+    "contact": "Contact",
+    "copyright": "© {year} TV Çelik A.Ş. All rights reserved.",
+    "whatsapp": "Contact via WhatsApp"
+  },
+  "home": {
+    "eyebrow": "Prefabricated & Steel Construction",
+    "title": "Building the Future\nwith the Power of Steel",
+    "subtitle": "Robust manufacturing solutions in light steel, prefabricated, container and industrial building systems.",
+    "whatsappText": "Contact via WhatsApp",
+    "secondaryText": "Explore Our Services",
+    "servicesEyebrow": "What We Build",
+    "servicesTitle": "Our Service Categories",
+    "viewAll": "View All →",
+    "processEyebrow": "How We Work",
+    "processTitle": "From Production to Delivery",
+    "processSubtitle": "From initial design to handover, we manage every step with diligence and full transparency.",
+    "ctaEyebrow": "Free Consultation",
+    "ctaTitle": "Let's Discuss Your Project",
+    "ctaDescription": "Would you like a quote for a prefabricated building, steel system or container solution? Write to us on WhatsApp and we'll respond promptly.",
+    "ctaResponseNote": "Average response time: within 1 hour",
+    "foldableEyebrow": "Featured Service",
+    "foldableTitle": "Foldable & Portable Structures",
+    "foldableDesc": "Our building systems require no permanent foundation — they can be transported and reassembled on a new site: fast installation, low cost, maximum flexibility.",
+    "foldableCta": "Learn More",
+    "foldableF1Title": "Fast Installation",
+    "foldableF1Body": "No concrete foundation required. Ready for installation in 1–3 days.",
+    "foldableF2Title": "Portable",
+    "foldableF2Body": "Disassemble and relocate to a different site whenever needed.",
+    "foldableF3Title": "Cost Advantage",
+    "foldableF3Body": "Up to 40% savings compared to conventional construction.",
+    "processStep01Title": "Design",
+    "processStep01Desc": "Site survey, needs analysis and preparation of a client-specific technical project file.",
+    "processStep02Title": "Manufacturing",
+    "processStep02Desc": "ISO-standard, quality-controlled production of steel structural components.",
+    "processStep03Title": "Logistics",
+    "processStep03Desc": "Packaging and safe, planned delivery of all components to the construction site.",
+    "processStep04Title": "Assembly",
+    "processStep04Desc": "Fast, safe and technically supervised installation on site by our expert team.",
+    "processStep05Title": "Handover",
+    "processStep05Desc": "Final inspections, client acceptance and turnkey handover with warranty certificate."
+  },
+  "services": {
+    "breadcrumbHome": "Home",
+    "breadcrumbServices": "Services",
+    "title": "Our Services",
+    "subtitle": "Prefabricated buildings, light steel systems, container solutions and more.",
+    "backToServices": "← Back to all services",
+    "viewAllServices": "View All Services →",
+    "categories": {
+      "prefabrik-yapilar": {
+        "header": "Prefabricated Buildings",
+        "description": "Modular building systems manufactured in the factory and assembled on site, delivering fast installation and competitive pricing. Ready solutions for residential, office, site facility and social infrastructure projects.",
+        "subcategories": {
+          "tek-katli": "Single Storey",
+          "iki-katli": "Two Storey",
+          "villa-tipi": "Villa Type",
+          "santiye-yapilari": "Site Facilities",
+          "ofis-ve-idari": "Office & Administrative",
+          "sosyal-tesisler": "Social Facilities",
+          "egitim-ve-saglik": "Education & Healthcare"
+        }
+      },
+      "hafif-celik-yapilar": {
+        "header": "Light Steel Structures",
+        "description": "Earthquake-resistant and energy-efficient buildings manufactured with galvanised steel profile systems. A broad solution range from homes to villas, from tiny houses to modular housing systems.",
+        "subcategories": {
+          "hafif-celik-evler": "Light Steel Homes",
+          "villa-projeleri": "Villa Projects",
+          "tiny-house": "Tiny House",
+          "moduler-konut-sistemleri": "Modular Housing Systems",
+          "katlanir-tasinabilir": "Foldable / Portable"
+        }
+      },
+      "konteyner-sistemleri": {
+        "header": "Container Systems",
+        "description": "ISO-standard, turnkey-equipped container building solutions suitable for modular combination. Rapid delivery for residential, office, site and custom design projects.",
+        "subcategories": {
+          "yasam-konteyneri": "Living Container",
+          "ofis-konteyneri": "Office Container",
+          "santiye-konteyneri": "Site Container",
+          "tiny-house-konteyner": "Tiny House Container",
+          "katlanir-konteyner": "Foldable Container",
+          "ozel-tasarim": "Custom Design"
+        }
+      },
+      "endustriyel-celik-yapilar": {
+        "header": "Industrial Steel Structures",
+        "description": "Wide-span, column-free steel systems for factory, warehouse, hangar and agricultural building needs. Industrial reliability with high load capacity and long service life.",
+        "subcategories": {
+          "celik-hangarlar": "Steel Hangars",
+          "fabrika-binalari": "Factory Buildings",
+          "depolar": "Warehouses",
+          "hayvan-barinalari": "Animal Shelters",
+          "tarimsal-yapilar": "Agricultural Structures"
+        }
+      },
+      "yapisal-bilesenler": {
+        "header": "Structural Components",
+        "description": "CNC plasma-cut and custom-manufactured steel profiles, chassis, roof and cladding systems. TSE and EN standard-compliant load-bearing solutions with rapid delivery from project to handover.",
+        "subcategories": {
+          "celik-profiller": "Steel Profiles",
+          "sasi-sistemleri": "Chassis Systems",
+          "cati-ve-celik-sac": "Roof & Steel Sheet",
+          "panel-ve-kaplama": "Panel & Cladding",
+          "ozel-uretim": "Custom Manufacturing"
+        }
+      }
+    }
+  },
+  "corporate": {
+    "eyebrow": "About Us",
+    "title": "Corporate",
+    "aboutTitle": "About Us",
+    "missionTitle": "Our Mission",
+    "visionTitle": "Our Vision",
+    "ctaTitle": "Would You Like to Work With Us?",
+    "ctaDesc": "Write to us on WhatsApp to discuss your project.",
+    "whatsapp": "Contact via WhatsApp",
+    "about1": "At TV Çelik A.Ş., with over 30 years of experience, we are proud to be one of the sector's trusted solution partners in the production of prefabricated buildings, container systems, light steel structures, hangars and animal shelters.",
+    "about2": "From production to assembly, from dismantling to reassembly and turnkey projects, we meticulously manage every process — creating safe, sustainable living and working spaces for millions of people.",
+    "about3": "With our approach sensitive to the environment, living beings and people, we continue to produce durable, functional and modern structures, redefining the concept of living space.",
+    "mission": "To produce high-quality, durable and rapidly deployable light steel, prefabricated and modular building solutions, providing our clients with safe, economical and long-lasting residential and working spaces.",
+    "vision": "To become a trusted, strong and preferred brand in Turkey and globally through an innovative manufacturing approach in light steel and modular building systems."
+  },
+  "contact": {
+    "eyebrow": "Get in Touch",
+    "title": "Contact",
+    "whatsappTitle": "Fastest Way: WhatsApp",
+    "whatsappDesc": "Write to us directly on WhatsApp to get information about your project. We respond as soon as possible.",
+    "whatsappBtn": "Message on WhatsApp",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "addressLabel": "Our Locations",
+    "addressMerkez": "Headquarters",
+    "addressShowroom": "Showroom",
+    "addressFabrika": "Factory"
+  },
+  "projects": {
+    "eyebrow": "References",
+    "title": "Projects",
+    "ctaTitle": "Let's Discuss Your Project",
+    "ctaDesc": "Would you like a quote for a similar project?",
+    "whatsapp": "Contact via WhatsApp",
+    "empty": "Projects will be added soon."
+  },
+  "serviceDetail": {
+    "about": "About This Service",
+    "useCases": "Where Is It Used?",
+    "planDetails": "Plans & Technical Details",
+    "advantages": "Advantages",
+    "getQuote": "Get a Quote",
+    "ctaText": "Write directly to our experts about this service.",
+    "whatsapp": "Contact via WhatsApp",
+    "processEyebrow": "Our Work Process",
+    "processTitle": "From Production to Delivery",
+    "relatedTitle": "Other Services in This Category",
+    "relatedViewAll": "View all →",
+    "processStep01Title": "Discovery",
+    "processStep01Desc": "Site visit, needs analysis and technical evaluation.",
+    "processStep02Title": "Design",
+    "processStep02Desc": "Preparation of the project file based on measurements and requirements.",
+    "processStep03Title": "Production",
+    "processStep03Desc": "ISO-standard manufacturing of steel structural components.",
+    "processStep04Title": "Assembly",
+    "processStep04Desc": "Safe and technically supervised installation by our expert team.",
+    "processStep05Title": "Handover",
+    "processStep05Desc": "Client acceptance, final inspections and turnkey transfer.",
+    "whatsappDefaultMsg": "Hello, I would like to get information about {service}."
+  },
+  "common": {
+    "foldableBadge": "Featured"
+  }
+}

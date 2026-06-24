@@ -1,0 +1,191 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "services": "Hizmetler",
+    "projects": "Projeler",
+    "corporate": "Kurumsal",
+    "contact": "İletişim",
+    "whatsapp": "WhatsApp'tan Yazın",
+    "openMenu": "Menüyü Aç",
+    "closeMenu": "Menüyü Kapat",
+    "expandServices": "Hizmetleri Genişlet",
+    "viewAllServices": "Tüm Hizmetleri Gör →"
+  },
+  "footer": {
+    "tagline": "Çelikten Güç, Yapıdan Güven",
+    "subtitle": "Prefabrik, hafif çelik ve konteyner yapı sistemleri",
+    "pages": "Sayfalar",
+    "services": "Hizmetler",
+    "contact": "İletişim",
+    "copyright": "© {year} TV Çelik A.Ş. Tüm hakları saklıdır.",
+    "whatsapp": "WhatsApp'tan Yazın"
+  },
+  "home": {
+    "eyebrow": "Prefabrik & Çelik Yapı",
+    "title": "Çeliğin Gücüyle\nGeleceği İnşa Ediyoruz",
+    "subtitle": "Hafif çelik, prefabrik, konteyner ve endüstriyel yapı sistemlerinde güçlü üretim çözümleri.",
+    "whatsappText": "WhatsApp'tan Yazın",
+    "secondaryText": "Hizmetlerimizi Keşfedin",
+    "servicesEyebrow": "Ne İnşa Ediyoruz",
+    "servicesTitle": "Hizmet Kategorilerimiz",
+    "viewAll": "Tümünü Gör →",
+    "processEyebrow": "Nasıl Çalışıyoruz",
+    "processTitle": "Üretimden Teslime Süreç",
+    "processSubtitle": "İlk tasarımdan anahtar teslime kadar tüm süreçleri titizlikle ve şeffaf biçimde yönetiyoruz.",
+    "ctaEyebrow": "Ücretsiz Görüşme",
+    "ctaTitle": "Projenizi Konuşalım",
+    "ctaDescription": "Prefabrik yapı, çelik sistem veya konteyner çözümü için teklif almak ister misiniz? WhatsApp'tan yazın, en kısa sürede yanıt veririz.",
+    "ctaResponseNote": "Ortalama yanıt süresi: 1 saat içinde",
+    "foldableEyebrow": "Öne Çıkan Hizmet",
+    "foldableTitle": "Katlanır ve Taşınabilir Yapılar",
+    "foldableDesc": "Sabit temele gerek duymadan kurulabilen, taşınıp yeniden monte edilebilen yapı sistemlerimiz — hızlı kurulum, düşük maliyet, maksimum esneklik.",
+    "foldableCta": "Daha Fazla Bilgi Al",
+    "foldableF1Title": "Hızlı Kurulum",
+    "foldableF1Body": "Beton temel gerektirmez, 1–3 günde kuruluma hazır.",
+    "foldableF2Title": "Taşınabilir",
+    "foldableF2Body": "İhtiyaca göre söküp farklı bir konuma nakledebilirsiniz.",
+    "foldableF3Title": "Maliyet Avantajı",
+    "foldableF3Body": "Geleneksel inşaata kıyasla %40'a varan tasarruf.",
+    "processStep01Title": "Projelendirme",
+    "processStep01Desc": "Saha ölçümü, ihtiyaç analizi ve müşteriye özel teknik proje dosyasının hazırlanması.",
+    "processStep02Title": "Fabrika Üretimi",
+    "processStep02Desc": "Tasarıma uygun çelik yapı elemanlarının ISO standartlarında kalite kontrollü üretimi.",
+    "processStep03Title": "Sevkiyat",
+    "processStep03Desc": "Tüm bileşenlerin paketlenerek şantiye sahasına planlı ve güvenli lojistikle taşınması.",
+    "processStep04Title": "Montaj",
+    "processStep04Desc": "Uzman ekibimiz tarafından sahada hızlı, güvenli ve teknik denetime uygun kurulum.",
+    "processStep05Title": "Teslim",
+    "processStep05Desc": "Son kontroller ve müşteri kabulünden sonra anahtar teslim yapı devri ve garanti belgesi."
+  },
+  "services": {
+    "breadcrumbHome": "Ana Sayfa",
+    "breadcrumbServices": "Hizmetler",
+    "title": "Hizmetlerimiz",
+    "subtitle": "Prefabrik yapılar, hafif çelik sistemler, konteyner çözümleri ve daha fazlası.",
+    "backToServices": "← Tüm hizmetlere dön",
+    "viewAllServices": "Tüm Hizmetleri Gör →",
+    "categories": {
+      "prefabrik-yapilar": {
+        "header": "Prefabrik Yapılar",
+        "description": "Fabrikada üretilerek sahaya monte edilen, hızlı kurulum ve uygun maliyet avantajıyla öne çıkan modüler yapı sistemleri. Konut, ofis, şantiye ve sosyal tesis projelerine hazır çözümler sunulmaktadır.",
+        "subcategories": {
+          "tek-katli": "Tek katlı",
+          "iki-katli": "İki katlı",
+          "villa-tipi": "Villa tipi",
+          "santiye-yapilari": "Şantiye yapıları",
+          "ofis-ve-idari": "Ofis ve idari",
+          "sosyal-tesisler": "Sosyal tesisler",
+          "egitim-ve-saglik": "Eğitim ve sağlık"
+        }
+      },
+      "hafif-celik-yapilar": {
+        "header": "Hafif Çelik Yapılar",
+        "description": "Galvanizli çelik profil sistemiyle üretilen, depreme dayanıklı ve enerji verimli yapılar. Konuttan villaya, tiny house'tan modüler konut sistemine kadar geniş çözüm yelpazesi sunulmaktadır.",
+        "subcategories": {
+          "hafif-celik-evler": "Hafif çelik evler",
+          "villa-projeleri": "Villa projeleri",
+          "tiny-house": "Tiny house",
+          "moduler-konut-sistemleri": "Modüler konut sistemleri",
+          "katlanir-tasinabilir": "Katlanır / taşınabilir"
+        }
+      },
+      "konteyner-sistemleri": {
+        "header": "Konteyner Sistemleri",
+        "description": "ISO standartlarında üretilmiş, anahtar teslim donatımlı ve modüler birleştirmeye uygun konteyner yapı çözümleri. Yaşam, ofis, şantiye ve özel tasarım projelerine hızlı teslimat imkânı.",
+        "subcategories": {
+          "yasam-konteyneri": "Yaşam konteyneri",
+          "ofis-konteyneri": "Ofis konteyneri",
+          "santiye-konteyneri": "Şantiye konteyneri",
+          "tiny-house-konteyner": "Tiny house konteyner",
+          "katlanir-konteyner": "Katlanır konteyner",
+          "ozel-tasarim": "Özel tasarım"
+        }
+      },
+      "endustriyel-celik-yapilar": {
+        "header": "Endüstriyel Çelik Yapılar",
+        "description": "Geniş açıklıklı kirişsiz tasarımıyla fabrika, depo, hangar ve tarımsal yapı ihtiyaçlarına yönelik çelik sistemler. Yüksek yük kapasitesi ve uzun kullanım ömrüyle endüstriyel güvenilirlik.",
+        "subcategories": {
+          "celik-hangarlar": "Çelik hangarlar",
+          "fabrika-binalari": "Fabrika binaları",
+          "depolar": "Depolar",
+          "hayvan-barinalari": "Hayvan barınakları",
+          "tarimsal-yapilar": "Tarımsal yapılar"
+        }
+      },
+      "yapisal-bilesenler": {
+        "header": "Yapısal Bileşenler",
+        "description": "CNC plazma kesim ve özel üretim çelik profil, şasi, çatı ve kaplama sistemleri. TSE ve EN standartlarına uygun, projeden teslimata hızlı sevkiyat imkânıyla taşıyıcı sistem çözümleri.",
+        "subcategories": {
+          "celik-profiller": "Çelik profiller",
+          "sasi-sistemleri": "Şasi sistemleri",
+          "cati-ve-celik-sac": "Çatı ve çelik sac",
+          "panel-ve-kaplama": "Panel ve kaplama",
+          "ozel-uretim": "Özel üretim"
+        }
+      }
+    }
+  },
+  "corporate": {
+    "eyebrow": "Hakkımızda",
+    "title": "Kurumsal",
+    "aboutTitle": "Hakkımızda",
+    "missionTitle": "Misyonumuz",
+    "visionTitle": "Vizyonumuz",
+    "ctaTitle": "Bizimle Çalışmak İster misiniz?",
+    "ctaDesc": "Projenizi konuşmak için WhatsApp'tan bize yazın.",
+    "whatsapp": "WhatsApp'tan Yazın",
+    "about1": "TV Çelik A.Ş. olarak, 30 yılı aşkın deneyimimizle; prefabrik yapılar, konteyner sistemleri, hafif çelik yapılar, hangarlar ve hayvan barınakları üretiminde sektörün güvenilir çözüm ortaklarından biri olmanın gururunu yaşıyoruz.",
+    "about2": "Üretimden montaja, demontajdan yeniden kuruluma ve anahtar teslim projelere kadar tüm süreçleri titizlikle yöneterek, milyonlarca insan için güvenli ve sürdürülebilir yaşam alanları oluşturduk.",
+    "about3": "Çevreye, canlılara ve insana duyarlı yaklaşımımızla; dayanıklı, fonksiyonel ve modern yapılar üretmeye, yaşam alanlarını yeniden tanımlamaya devam ediyoruz.",
+    "mission": "Kaliteli, dayanıklı ve hızlı uygulanabilir hafif çelik, prefabrik ve modüler yapı çözümleri üreterek; müşterilerimize güvenli, ekonomik ve uzun ömürlü yaşam ve çalışma alanları sunmak.",
+    "vision": "Hafif çelik ve modüler yapı sistemlerinde yenilikçi üretim anlayışıyla Türkiye'de ve dünyada güvenilir, güçlü ve tercih edilen bir marka olmak."
+  },
+  "contact": {
+    "eyebrow": "Bize Ulaşın",
+    "title": "İletişim",
+    "whatsappTitle": "En Hızlı Yol: WhatsApp",
+    "whatsappDesc": "Projeniz hakkında bilgi almak için doğrudan WhatsApp'tan yazın. En kısa sürede yanıt veririz.",
+    "whatsappBtn": "WhatsApp'tan Yazın",
+    "phoneLabel": "Telefon",
+    "emailLabel": "E-posta",
+    "addressLabel": "Adreslerimiz",
+    "addressMerkez": "Merkez",
+    "addressShowroom": "Showroom",
+    "addressFabrika": "Fabrika"
+  },
+  "projects": {
+    "eyebrow": "Referanslarımız",
+    "title": "Projeler",
+    "ctaTitle": "Projenizi Konuşalım",
+    "ctaDesc": "Benzer bir proje için teklif almak ister misiniz?",
+    "whatsapp": "WhatsApp'tan Yazın",
+    "empty": "Projeler yakında eklenecektir."
+  },
+  "serviceDetail": {
+    "about": "Hizmet Hakkında",
+    "useCases": "Nerelerde Kullanılır?",
+    "planDetails": "Plan ve Teknik Detaylar",
+    "advantages": "Avantajlar",
+    "getQuote": "Teklif Alın",
+    "ctaText": "Bu hizmet hakkında uzmanlarımıza doğrudan yazın.",
+    "whatsapp": "WhatsApp'tan Yazın",
+    "processEyebrow": "Çalışma Sürecimiz",
+    "processTitle": "Üretimden Teslime",
+    "relatedTitle": "Bu Kategorideki Diğer Hizmetler",
+    "relatedViewAll": "Tümünü gör →",
+    "processStep01Title": "Keşif",
+    "processStep01Desc": "Saha ziyareti, ihtiyaç analizi ve teknik değerlendirme.",
+    "processStep02Title": "Projelendirme",
+    "processStep02Desc": "Ölçüm ve gereksinimlere dayalı proje dosyasının hazırlanması.",
+    "processStep03Title": "Üretim",
+    "processStep03Desc": "Çelik yapı elemanlarının ISO standartlarında üretimi.",
+    "processStep04Title": "Montaj",
+    "processStep04Desc": "Uzman ekip tarafından güvenli ve denetimli kurulum.",
+    "processStep05Title": "Teslim",
+    "processStep05Desc": "Müşteri kabulü, son kontroller ve anahtar teslim devir.",
+    "whatsappDefaultMsg": "Merhaba, {service} hakkında bilgi almak istiyorum."
+  },
+  "common": {
+    "foldableBadge": "Öne Çıkan"
+  }
+}

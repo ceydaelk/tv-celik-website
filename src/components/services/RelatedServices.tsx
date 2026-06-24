@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { CATEGORIES } from "@/data/services";
 import { getSubcategories } from "@/lib/firestore/services";
 import { getServiceCoverImage } from "@/lib/localServiceImages";
@@ -23,7 +24,11 @@ const CATEGORY_BG: Record<string, string> = {
 };
 
 export default async function RelatedServices({ currentSlug, categorySlug }: RelatedServicesProps) {
-  // Firestore'dan al; boş gelirse hardcoded veriye dön
+  const [t, ts] = await Promise.all([
+    getTranslations("serviceDetail"),
+    getTranslations("services"),
+  ]);
+
   const fsSubs      = await getSubcategories(categorySlug);
   const fallbackCat = CATEGORIES.find((c) => c.slug === categorySlug);
   const allSubs     = fsSubs.length > 0 ? fsSubs : (fallbackCat?.subcategories ?? []);
@@ -32,7 +37,9 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
   if (siblings.length === 0) return null;
 
   const bg           = CATEGORY_BG[categorySlug] ?? CATEGORY_BG["prefabrik-yapilar"];
-  const categoryName = fallbackCat?.header ?? categorySlug;
+  const categoryName = fallbackCat
+    ? ts(`categories.${categorySlug}.header`, { fallback: fallbackCat.header })
+    : categorySlug;
 
   return (
     <div className="bg-[#F5F5F3] border-t border-[#EAEAE6]">
@@ -44,14 +51,14 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
               {categoryName}
             </p>
             <h2 className="text-base font-bold text-[#1C1C1C]">
-              Bu Kategorideki Diğer Hizmetler
+              {t("relatedTitle")}
             </h2>
           </div>
           <Link
             href={`/hizmetler/${categorySlug}`}
             className="flex-shrink-0 text-[12px] text-[#8A8680] hover:text-[#1C1C1C] transition-colors"
           >
-            Tümünü gör →
+            {t("relatedViewAll")}
           </Link>
         </div>
 
@@ -61,6 +68,7 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
               (s as { imageUrl?: string }).imageUrl?.startsWith("http")
                 ? (s as { imageUrl?: string }).imageUrl!
                 : getServiceCoverImage(s.slug);
+            const subLabel = ts(`categories.${categorySlug}.subcategories.${s.slug}`, { fallback: s.label });
 
             return (
               <Link
@@ -72,7 +80,7 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
                 {imgSrc && (
                   <Image
                     src={imgSrc}
-                    alt={s.label}
+                    alt={subLabel}
                     fill
                     className="object-cover opacity-40"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -80,7 +88,7 @@ export default async function RelatedServices({ currentSlug, categorySlug }: Rel
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                 <div className="relative mt-auto p-4">
-                  <h3 className="text-[13px] font-bold text-white leading-snug">{s.label}</h3>
+                  <h3 className="text-[13px] font-bold text-white leading-snug">{subLabel}</h3>
                 </div>
               </Link>
             );

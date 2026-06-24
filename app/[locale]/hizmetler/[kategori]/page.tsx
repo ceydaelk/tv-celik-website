@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 import { CATEGORIES } from "@/data/services";
 import { getSubcategories } from "@/lib/firestore/services";
 import ServiceCard from "@/components/home/ServiceCard";
 import BreadcrumbNav from "@/components/common/BreadcrumbNav";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tvcelik.com";
 const FOLDABLE_SLUGS = ["katlanir-tasinabilir", "katlanir-konteyner"] as const;
 
-// generateStaticParams hardcoded veriden çalışır — mevcut 5 kategori her zaman statik derlenir
-// Firestore'da yeni eklenecek kategoriler dinamik olarak render edilir (Next.js default)
 export function generateStaticParams() {
   return CATEGORIES.map((cat) => ({ kategori: cat.slug }));
 }
@@ -16,75 +17,84 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ kategori: string }>;
+  params: Promise<{ locale: string; kategori: string }>;
 }): Promise<Metadata> {
-  const { kategori } = await params;
+  const { locale, kategori } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
+  const isTr = locale === "tr";
+
   const cat = CATEGORIES.find((c) => c.slug === kategori);
-  if (!cat) return { title: "Hizmetler — TV Çelik A.Ş." };
+  const catHeader = cat ? t(`categories.${kategori}.header`, { fallback: cat.header }) : kategori;
+
   return {
-    title:       `${cat.header} — TV Çelik A.Ş.`,
-    description: `TV Çelik ${cat.header} hizmetleri: ${cat.subcategories.map((s) => s.label).join(", ")}.`,
-    alternates:  { canonical: `/hizmetler/${kategori}` },
+    title: `${catHeader} — TV Çelik A.Ş.`,
+    description: cat
+      ? `TV Çelik ${catHeader}: ${cat.subcategories.map((s) => t(`categories.${kategori}.subcategories.${s.slug}`, { fallback: s.label })).join(", ")}.`
+      : `${catHeader} — TV Çelik A.Ş.`,
+    alternates: {
+      canonical: isTr ? `/hizmetler/${kategori}` : `/en/hizmetler/${kategori}`,
+      languages: {
+        tr: `${siteUrl}/hizmetler/${kategori}`,
+        en: `${siteUrl}/en/hizmetler/${kategori}`,
+      },
+    },
   };
 }
 
 export default async function KategoriPage({
   params,
 }: {
-  params: Promise<{ kategori: string }>;
+  params: Promise<{ locale: string; kategori: string }>;
 }) {
-  const { kategori } = await params;
+  const { locale, kategori } = await params;
+  const t = await getTranslations({ locale, namespace: "services" });
 
-  // Hardcoded fallback
   const hardcodedCat = CATEGORIES.find((c) => c.slug === kategori);
-
-  // Firestore'dan alt hizmetleri oku
   const firestoreSubs = await getSubcategories(kategori);
   const rawSubs = firestoreSubs.length > 0
     ? firestoreSubs
     : (hardcodedCat?.subcategories ?? []);
-  // isActive === false olanları gizle
   const subs = rawSubs.filter((s) => (s as { isActive?: boolean }).isActive !== false);
-
-  // Kategori başlığı için hardcoded veriden yararlan (nadiren değişir)
-  const categoryHeader = hardcodedCat?.header ?? kategori;
 
   if (subs.length === 0 && !hardcodedCat) notFound();
 
+  const categoryHeader = hardcodedCat
+    ? t(`categories.${kategori}.header`, { fallback: hardcodedCat.header })
+    : kategori;
+  const categoryDesc = hardcodedCat
+    ? t(`categories.${kategori}.description`, { fallback: hardcodedCat.description })
+    : "";
+
   return (
     <div className="bg-[#FAFAF9]">
-      {/* Page header */}
       <div className="bg-[#1C1C1C] py-10 sm:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <BreadcrumbNav
             items={[
-              { label: "Ana Sayfa", href: "/" },
-              { label: "Hizmetler", href: "/hizmetler" },
+              { label: t("breadcrumbHome"), href: "/" },
+              { label: t("breadcrumbServices"), href: "/hizmetler" },
               { label: categoryHeader },
             ]}
           />
           <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mt-4">
             {categoryHeader}
           </h1>
-          <p className="mt-3 text-base font-normal text-white/60 max-w-xl">
-            {hardcodedCat?.description ?? ""}
-          </p>
+          <p className="mt-3 text-base font-normal text-white/60 max-w-xl">{categoryDesc}</p>
         </div>
       </div>
 
-      {/* Subcategory cards */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {subs.map((sub) => {
             const imageUrl = (sub as { imageUrl?: string; imagePlaceholder?: string }).imageUrl
-              ?? (sub as { imagePlaceholder?: string }).imagePlaceholder
-              ?? "";
+              ?? (sub as { imagePlaceholder?: string }).imagePlaceholder ?? "";
+            const subLabel = t(`categories.${kategori}.subcategories.${sub.slug}`, { fallback: sub.label });
             return (
               <ServiceCard
                 key={sub.slug}
                 slug={sub.slug}
                 categorySlug={sub.categorySlug}
-                label={sub.label}
+                label={subLabel}
                 description={(sub as { shortDescription?: string }).shortDescription || sub.description}
                 imagePlaceholder={imageUrl}
                 variant="listing"
@@ -95,9 +105,9 @@ export default async function KategoriPage({
         </div>
 
         <div className="mt-12 pt-8 border-t border-[#DDDBD6]">
-          <a href="/hizmetler" className="text-sm font-bold text-[#9D7C64] transition-colors hover:text-[#866A56]">
-            ← Tüm hizmetlere dön
-          </a>
+          <Link href="/hizmetler" className="text-sm font-bold text-[#9D7C64] transition-colors hover:text-[#866A56]">
+            {t("backToServices")}
+          </Link>
         </div>
       </div>
     </div>

@@ -13,14 +13,19 @@ interface Project {
   imageUrl?: string;
 }
 
-export default function ProjectsGrid({ projects }: { projects: Project[] }) {
+interface ProjectsGridProps {
+  projects: Project[];
+  emptyText?: string;
+}
+
+export default function ProjectsGrid({ projects, emptyText = "Projeler yakında eklenecektir." }: ProjectsGridProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.1 });
 
   if (projects.length === 0) {
     return (
       <div className="py-20 text-center">
-        <p className="text-base text-[#8A8680]">Projeler yakında eklenecektir.</p>
+        <p className="text-base text-[#8A8680]">{emptyText}</p>
       </div>
     );
   }
@@ -39,7 +44,6 @@ export default function ProjectsGrid({ projects }: { projects: Project[] }) {
           variants={fadeUp}
           className="border border-[#DDDBD6] rounded-lg overflow-hidden bg-white"
         >
-          {/* Image */}
           <div className="relative h-48 bg-gradient-to-br from-[#E8E6E1] to-[#F3F2EF] overflow-hidden">
             {project.imageUrl ? (
               <Image

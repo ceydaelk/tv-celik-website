@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { MessageCircle } from "lucide-react";
 import { ease } from "@/lib/motion";
 
@@ -26,6 +27,7 @@ export default function WhatsAppCTASection({
 }: WhatsAppCTASectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.25 });
+  const t = useTranslations("home");
 
   return (
     <section
@@ -45,7 +47,7 @@ export default function WhatsAppCTASection({
         transition={{ duration: 0.65, ease }}
       >
         <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.25em] text-[#9D7C64]">
-          Ücretsiz Görüşme
+          {t("ctaEyebrow")}
         </p>
         <h2 className="mb-5 text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-white">
           {title}

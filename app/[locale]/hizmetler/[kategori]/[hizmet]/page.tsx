@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
@@ -17,17 +18,7 @@ import RelatedServices from "@/components/services/RelatedServices";
 export const revalidate = 0;
 
 const FOLDABLE_SLUGS = ["katlanir-tasinabilir", "katlanir-konteyner"] as const;
-
-const PROCESS_STEPS = [
-  { n: "01", title: "Keşif",         desc: "Saha ziyareti, ihtiyaç analizi ve teknik değerlendirme." },
-  { n: "02", title: "Projelendirme", desc: "Ölçüm ve gereksinimlere dayalı proje dosyasının hazırlanması." },
-  { n: "03", title: "Üretim",        desc: "Çelik yapı elemanlarının ISO standartlarında üretimi." },
-  { n: "04", title: "Montaj",        desc: "Uzman ekip tarafından güvenli ve denetimli kurulum." },
-  { n: "05", title: "Teslim",        desc: "Müşteri kabulü, son kontroller ve anahtar teslim devir." },
-] as const;
-
-// Slight vertical stagger per step — breaks identical-column symmetry
-const STEP_PT = [20, 30, 22, 36, 26];
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.tvcelik.com";
 
 export function generateStaticParams() {
   return CATEGORIES.flatMap((cat) =>
@@ -38,25 +29,33 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ kategori: string; hizmet: string }>;
+  params: Promise<{ locale: string; kategori: string; hizmet: string }>;
 }): Promise<Metadata> {
-  const { hizmet } = await params;
+  const { locale, kategori, hizmet } = await params;
+  const isTr = locale === "tr";
   const fsSub   = await getSubcategoryBySlug(hizmet);
   const service = fsSub ?? SERVICES_MAP[hizmet];
-  const { kategori } = await params;
   return {
     title:       fsSub?.seoTitle       || (service ? `${service.label} — TV Çelik A.Ş.` : "Hizmet — TV Çelik A.Ş."),
     description: fsSub?.seoDescription || service?.description,
-    alternates:  { canonical: `/hizmetler/${kategori}/${hizmet}` },
+    alternates: {
+      canonical: isTr ? `/hizmetler/${kategori}/${hizmet}` : `/en/hizmetler/${kategori}/${hizmet}`,
+      languages: {
+        tr: `${siteUrl}/hizmetler/${kategori}/${hizmet}`,
+        en: `${siteUrl}/en/hizmetler/${kategori}/${hizmet}`,
+      },
+    },
   };
 }
 
 export default async function HizmetDetayPage({
   params,
 }: {
-  params: Promise<{ kategori: string; hizmet: string }>;
+  params: Promise<{ locale: string; kategori: string; hizmet: string }>;
 }) {
-  const { kategori, hizmet } = await params;
+  const { locale, kategori, hizmet } = await params;
+  const t = await getTranslations({ locale, namespace: "serviceDetail" });
+  const ts = await getTranslations({ locale, namespace: "services" });
 
   const [fsSub, company] = await Promise.all([
     getSubcategoryBySlug(hizmet),
@@ -81,14 +80,10 @@ export default async function HizmetDetayPage({
 
   const local = getLocalServiceImages(hizmet);
 
-  // Plan ve Teknik Detaylar — only URLs whose filename contains "plan"
   const planSections = local.plans
     .filter((url) => url.toLowerCase().includes("plan"))
     .map((url, i) => ({ id: `plan-${i}`, title: "", text: "", imageUrl: url }));
 
-  // Gallery — local images only when present; no Unsplash/Firestore contamination.
-  // Local images are the authoritative source. Firestore gallery is skipped entirely
-  // when local images exist to prevent wrong/plan images leaking into the gallery.
   const seen = new Set<string>();
   const galleryImages: GalleryImage[] = [];
 
@@ -99,31 +94,41 @@ export default async function HizmetDetayPage({
   }
 
   if (local.gallery.length > 0) {
-    // Local images: first entry is hero, rest are thumbnails
     addImage(local.gallery[0], merged.pageTitle);
     for (const url of local.gallery.slice(1)) addImage(url, "");
   } else {
-    // No local images: use Firestore gallery only (no Unsplash fallback)
     for (const g of merged.gallery) addImage(g.url ?? "", g.caption ?? "");
   }
 
-  // Firestore text sections — all of them, image fields are NOT rendered here
   const textSections = merged.sections.filter((s) => s.title || s.text);
+  const useCases     = CATEGORY_USE_CASES[kategori] ?? GENERIC_USE_CASES;
+  const defaultWaMsg = t("whatsappDefaultMsg", { service: merged.label });
+  const whatsappMsg  = merged.ctaWhatsappText || (locale === "tr"
+    ? `Merhaba, ${merged.label} hakkında bilgi almak istiyorum.`
+    : defaultWaMsg);
 
-  const useCases    = CATEGORY_USE_CASES[kategori] ?? GENERIC_USE_CASES;
-  const whatsappMsg = merged.ctaWhatsappText || `Merhaba, ${merged.label} hakkında bilgi almak istiyorum.`;
+  const categoryHeader = ts(`categories.${kategori}.header`, { fallback: category.header });
+
+  const processSteps = [
+    { n: "01", title: t("processStep01Title"), desc: t("processStep01Desc") },
+    { n: "02", title: t("processStep02Title"), desc: t("processStep02Desc") },
+    { n: "03", title: t("processStep03Title"), desc: t("processStep03Desc") },
+    { n: "04", title: t("processStep04Title"), desc: t("processStep04Desc") },
+    { n: "05", title: t("processStep05Title"), desc: t("processStep05Desc") },
+  ] as const;
+
+  const STEP_PT = [20, 30, 22, 36, 26];
 
   return (
     <div className="bg-white">
 
-      {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <header className="bg-[#111111]">
         <div className="max-w-7xl mx-auto px-6 pt-6 pb-12">
           <BreadcrumbNav
             items={[
-              { label: "Ana Sayfa",      href: "/" },
-              { label: "Hizmetler",      href: "/hizmetler" },
-              { label: category.header,  href: `/hizmetler/${kategori}` },
+              { label: ts("breadcrumbHome"),     href: "/" },
+              { label: ts("breadcrumbServices"), href: "/hizmetler" },
+              { label: categoryHeader,           href: `/hizmetler/${kategori}` },
               { label: merged.label },
             ]}
           />
@@ -144,19 +149,14 @@ export default async function HizmetDetayPage({
         </div>
       </header>
 
-      {/* ── MAIN BODY: 2-column product layout ──────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 py-10 pb-16">
         <div className="grid lg:grid-cols-[1fr_300px] xl:grid-cols-[1fr_320px] gap-10 xl:gap-14 items-start">
 
-          {/* ── LEFT COLUMN ─────────────────────────────────────────────── */}
           <div className="space-y-10">
-
-            {/* Gallery */}
             <ServiceGallery images={galleryImages} />
 
-            {/* Description */}
             <div>
-              <p className={LABEL}>Hizmet Hakkında</p>
+              <p className={LABEL}>{t("about")}</p>
               <div className="mt-4 space-y-4">
                 {merged.description.split("\n").filter(Boolean).map((para, i) => (
                   <p key={i} className="text-[15px] leading-[1.75] text-[#2A2A2A]">{para}</p>
@@ -164,9 +164,8 @@ export default async function HizmetDetayPage({
               </div>
             </div>
 
-            {/* Use cases */}
             <div>
-              <p className={LABEL}>Nerelerde Kullanılır?</p>
+              <p className={LABEL}>{t("useCases")}</p>
               <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 sm:gap-y-0">
                 {[useCases.group1, useCases.group2].map((group) => (
                   <div key={group.heading}>
@@ -186,17 +185,15 @@ export default async function HizmetDetayPage({
               </div>
             </div>
 
-            {/* Plan / technical drawings — shown only when sections have images */}
             {planSections.length > 0 && (
               <div>
-                <p className={LABEL}>Plan ve Teknik Detaylar</p>
+                <p className={LABEL}>{t("planDetails")}</p>
                 <div className="mt-4">
                   <PlanSection sections={planSections} />
                 </div>
               </div>
             )}
 
-            {/* Text-only sections */}
             {textSections.length > 0 && (
               <div className="space-y-8">
                 {textSections.map((sec) => (
@@ -213,15 +210,11 @@ export default async function HizmetDetayPage({
                 ))}
               </div>
             )}
-
           </div>
 
-          {/* ── RIGHT COLUMN — sticky sidebar ───────────────────────────── */}
           <div className="lg:sticky lg:top-8 self-start space-y-7">
-
-            {/* Avantajlar */}
             <div>
-              <p className={LABEL}>Avantajlar</p>
+              <p className={LABEL}>{t("advantages")}</p>
               <div className="mt-3">
                 {merged.features.map((feat, i) => (
                   <div key={i}>
@@ -239,17 +232,13 @@ export default async function HizmetDetayPage({
               </div>
             </div>
 
-            {/* Separator */}
             <div className="border-t border-[#EAEAE6]" />
 
-            {/* WhatsApp CTA — compact, left-accent, no rounded SaaS card */}
             <div className="border-l-2 border-[#9D7C64] pl-4">
               <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#9D7C64] mb-1.5">
-                Teklif Alın
+                {t("getQuote")}
               </p>
-              <p className="text-[13px] text-[#555555] mb-4 leading-relaxed">
-                Bu hizmet hakkında uzmanlarımıza doğrudan yazın.
-              </p>
+              <p className="text-[13px] text-[#555555] mb-4 leading-relaxed">{t("ctaText")}</p>
               <a
                 href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(whatsappMsg)}`}
                 target="_blank"
@@ -257,29 +246,27 @@ export default async function HizmetDetayPage({
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-[13px] font-bold text-white bg-[#25D366] hover:bg-[#1da851] transition-colors"
               >
                 <MessageCircle size={13} />
-                WhatsApp&apos;tan Yazın
+                {t("whatsapp")}
               </a>
               <Link
                 href={`/hizmetler/${kategori}`}
                 className="block mt-2.5 text-center text-[11px] text-[#8A8680] hover:text-[#1C1C1C] transition-colors"
               >
-                ← {category.header}
+                ← {categoryHeader}
               </Link>
             </div>
-
           </div>
         </div>
       </div>
 
-      {/* ── SÜREÇ — full-width, below grid ──────────────────────────────── */}
       <section className="border-t border-[#EAEAE6] bg-white py-14">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#9D7C64] mb-2">
-            Çalışma Sürecimiz
+            {t("processEyebrow")}
           </p>
-          <h2 className="text-xl font-bold text-[#1C1C1C] mb-10">Üretimden Teslime</h2>
+          <h2 className="text-xl font-bold text-[#1C1C1C] mb-10">{t("processTitle")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-0">
-            {PROCESS_STEPS.map((step, i) => (
+            {processSteps.map((step, i) => (
               <div
                 key={step.n}
                 className={`border-t-2 border-[#EAEAE6] pr-8 pt-5 lg:[padding-top:${STEP_PT[i]}px]`}
@@ -296,7 +283,6 @@ export default async function HizmetDetayPage({
         </div>
       </section>
 
-      {/* ── RELATED ─────────────────────────────────────────────────────── */}
       <RelatedServices currentSlug={hizmet} categorySlug={kategori} />
 
     </div>

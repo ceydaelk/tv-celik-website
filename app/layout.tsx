@@ -1,11 +1,6 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
-import { WhatsAppFAB } from "@/components/common/WhatsAppFAB";
-import MotionProvider from "@/components/common/MotionProvider";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { getCompanyData } from "@/lib/firestore/company";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -36,23 +31,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+// Root layout: provides html/body and fonts only.
+// Navbar, Footer and locale providers live in app/[locale]/layout.tsx.
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const company = await getCompanyData();
-  const whatsappPhone = company.whatsapp ?? "905467343030";
-
   return (
-    <html lang="tr" className={`${inter.variable} ${montserrat.variable} h-full antialiased`}>
+    <html className={`${inter.variable} ${montserrat.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <MotionProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <WhatsAppFAB phone={whatsappPhone} />
-        </MotionProvider>
+        {children}
       </body>
     </html>
   );
