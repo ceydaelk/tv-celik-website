@@ -49,6 +49,15 @@ export default async function KategoriPage({
   const { locale, kategori } = await params;
   const t = await getTranslations({ locale, namespace: "services" });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tAny = t as any;
+  const getSubDesc = (subSlug: string, fallback: string): string => {
+    try {
+      const descs = tAny.raw(`categories.${kategori}.subcategoryDescriptions`) as Record<string, string> | undefined;
+      return descs?.[subSlug] || fallback;
+    } catch { return fallback; }
+  };
+
   const hardcodedCat = CATEGORIES.find((c) => c.slug === kategori);
   const firestoreSubs = await getSubcategories(kategori);
   const rawSubs = firestoreSubs.length > 0
@@ -95,7 +104,7 @@ export default async function KategoriPage({
                 slug={sub.slug}
                 categorySlug={sub.categorySlug}
                 label={subLabel}
-                description={(sub as { shortDescription?: string }).shortDescription || sub.description}
+                description={getSubDesc(sub.slug, (sub as { shortDescription?: string }).shortDescription || sub.description)}
                 imagePlaceholder={imageUrl}
                 variant="listing"
                 isFoldable={FOLDABLE_SLUGS.includes(sub.slug as typeof FOLDABLE_SLUGS[number])}

@@ -63,13 +63,14 @@ export default function ServicesGrid() {
         >
           {CATEGORIES.map((cat) => {
             const catLabel = ts(`categories.${cat.slug}.header`, { fallback: cat.header });
+            const catDesc  = ts(`categories.${cat.slug}.description`, { fallback: cat.subcategories[0].description });
             return (
               <motion.div key={cat.slug} variants={fadeUp}>
                 <ServiceCard
                   slug={cat.slug}
                   categorySlug={cat.slug}
                   label={catLabel}
-                  description={cat.subcategories[0].description}
+                  description={catDesc}
                   imagePlaceholder=""
                   variant="homepage"
                 />

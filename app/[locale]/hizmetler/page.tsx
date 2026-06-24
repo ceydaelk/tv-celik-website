@@ -39,6 +39,15 @@ export default async function HizmetlerPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "services" });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tAny = t as any;
+  const getSubDesc = (catSlug: string, subSlug: string, fallback: string): string => {
+    try {
+      const descs = tAny.raw(`categories.${catSlug}.subcategoryDescriptions`) as Record<string, string> | undefined;
+      return descs?.[subSlug] || fallback;
+    } catch { return fallback; }
+  };
+
   const firestoreCats = await getCategories();
   const useFirestore  = firestoreCats.length > 0;
 
@@ -94,7 +103,7 @@ export default async function HizmetlerPage({
                       slug={sub.slug}
                       categorySlug={sub.categorySlug}
                       label={subLabel}
-                      description={(sub as { shortDescription?: string }).shortDescription || sub.description}
+                      description={getSubDesc(cat.slug, sub.slug, (sub as { shortDescription?: string }).shortDescription || sub.description)}
                       imagePlaceholder={imageUrl}
                       variant="listing"
                       isFoldable={FOLDABLE_SLUGS.includes(sub.slug as typeof FOLDABLE_SLUGS[number])}
