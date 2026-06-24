@@ -76,6 +76,42 @@
           "ofis-ve-idari": "Ofis ve idari",
           "sosyal-tesisler": "Sosyal tesisler",
           "egitim-ve-saglik": "Eğitim ve sağlık"
+        },
+        "subcategoryDescriptions": {
+          "tek-katli": "Hızlı kurulum ve uygun maliyet avantajı sunan tek katlı prefabrik yapılar.",
+          "iki-katli": "İki katlı prefabrik yapılar ile daha geniş yaşam ve çalışma alanları.",
+          "villa-tipi": "Estetik ve konforlu villa tipi prefabrik konut çözümleri.",
+          "santiye-yapilari": "Dayanıklı ve taşınabilir şantiye ofisleri ve barınakları.",
+          "ofis-ve-idari": "Modern ofis ve idari binaların prefabrik çelik yapı sistemleriyle inşaatı.",
+          "sosyal-tesisler": "Kafeterya, spor salonu ve toplanma alanı gibi sosyal tesis prefabrik yapıları.",
+          "egitim-ve-saglik": "Okul, klinik ve sağlık merkezi için hızlı temin edilebilen prefabrik yapılar."
+        },
+        "features": [
+          "Fabrikada üretilip sahaya monte edildiğinden inşaat süresi kısalır",
+          "Çelik taşıyıcı sistem ile yüksek deprem dayanımı sağlar",
+          "Standart modüler boyutlar sayesinde hızlı teslimat imkânı sunar",
+          "Kapı, pencere ve yalıtım sistemleri fabrikada entegre edilir",
+          "Uzun vadeli bakım maliyetleri düşük, kullanım ömrü uzundur"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Konut ve Yaşam",
+            "items": [
+              "Müstakil ve aile konutları",
+              "Şantiye personel yapıları",
+              "Tatil ve yazlık evler",
+              "Köy ve kırsal konutlar"
+            ]
+          },
+          "group2": {
+            "heading": "Ticari ve Kurumsal",
+            "items": [
+              "Eğitim ve okul binaları",
+              "Sağlık merkezi ve klinik",
+              "Yönetim ve ofis binaları",
+              "Sosyal ve kültürel tesisler"
+            ]
+          }
         }
       },
       "hafif-celik-yapilar": {
@@ -87,6 +123,40 @@
           "tiny-house": "Tiny house",
           "moduler-konut-sistemleri": "Modüler konut sistemleri",
           "katlanir-tasinabilir": "Katlanır / taşınabilir"
+        },
+        "subcategoryDescriptions": {
+          "hafif-celik-evler": "Hafif çelik strüktür sistemiyle üretilen, depreme dayanıklı modern konutlar.",
+          "villa-projeleri": "Hafif çelik sistemle hayata geçirilen özel villa projeleri.",
+          "tiny-house": "Küçük alanlarda maksimum konfor sunan hafif çelik tiny house yapıları.",
+          "moduler-konut-sistemleri": "Fabrikada üretilip sahada birleştirilen modüler hafif çelik konut sistemleri.",
+          "katlanir-tasinabilir": "Sabit temele gerek duymadan kurulabilen, kolayca taşınıp yeniden monte edilebilen hafif çelik yapılar."
+        },
+        "features": [
+          "Ağır beton strüktüre kıyasla %30–50 daha hafif yapı ağırlığı",
+          "Galvanizli çelik profiller ile korozyon ve nem direnci",
+          "Zemin hazırlık süresi minimuma indirilerek hızlı kurulum",
+          "Sandviç panel entegrasyonu ile A sınıfı enerji verimliliği",
+          "Taşınabilir veya yeniden kurulabilir yapı seçeneği mevcuttur"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Konut",
+            "items": [
+              "Müstakil ev ve villa projeleri",
+              "Tiny house uygulamaları",
+              "Yazlık ve bağ evi",
+              "İkincil konut yapıları"
+            ]
+          },
+          "group2": {
+            "heading": "Ticari ve Toplu",
+            "items": [
+              "Modüler konut kompleksleri",
+              "Öğrenci ve personel yurdu",
+              "Turizm tesisi ve bungalov",
+              "Yönetim ve hizmet binaları"
+            ]
+          }
         }
       },
       "konteyner-sistemleri": {
@@ -99,6 +169,41 @@
           "tiny-house-konteyner": "Tiny house konteyner",
           "katlanir-konteyner": "Katlanır konteyner",
           "ozel-tasarim": "Özel tasarım"
+        },
+        "subcategoryDescriptions": {
+          "yasam-konteyneri": "Yüksek yalıtım standartlarında konforlu yaşam alanı sunan konteyner sistemleri.",
+          "ofis-konteyneri": "Hızlı kurulum avantajıyla saha ve ofis ihtiyaçlarını karşılayan konteyner çözümleri.",
+          "santiye-konteyneri": "Şantiye operasyonları için dayanıklı ve güvenli konteyner yapıları.",
+          "tiny-house-konteyner": "Minimal yaşam felsefesiyle tasarlanmış konteyner tiny house çözümleri.",
+          "katlanir-konteyner": "Taşıma ve depolama kolaylığı sağlayan, ihtiyaç anında hızla açılabilen katlanır konteyner sistemleri.",
+          "ozel-tasarim": "Projeye özel ölçü ve konfigürasyonlarda üretilen konteyner yapılar."
+        },
+        "features": [
+          "ISO standartlarında üretilmiş yüksek dayanımlı çelik gövde",
+          "Fabrika çıkışlı komple donatımlı teslim (elektrik, sıhhi tesisat)",
+          "Modüler birleştirme ile farklı büyüklüklerde kompleks oluşturulabilir",
+          "Nakliye ve yeniden kurulum desteği ile taşınabilir çözüm",
+          "Isı ve ses yalıtımı için çift cidarlı sandviç panel seçeneği"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Saha ve Geçici",
+            "items": [
+              "Şantiye ofis ve yatakhanesi",
+              "Güvenlik ve bekçi yapısı",
+              "Geçici saha depolama",
+              "Seyyar hizmet birimi"
+            ]
+          },
+          "group2": {
+            "heading": "Kalıcı Kullanım",
+            "items": [
+              "Küçük işletme ofisi",
+              "Perakende satış noktası",
+              "Kafe ve satış standı",
+              "Sanat atölyesi ve stüdyo"
+            ]
+          }
         }
       },
       "endustriyel-celik-yapilar": {
@@ -110,6 +215,40 @@
           "depolar": "Depolar",
           "hayvan-barinalari": "Hayvan barınakları",
           "tarimsal-yapilar": "Tarımsal yapılar"
+        },
+        "subcategoryDescriptions": {
+          "celik-hangarlar": "Geniş açıklıklı ve yüksek taşıma kapasiteli endüstriyel çelik hangarlar.",
+          "fabrika-binalari": "Üretim hatlarına uygun özelleştirilebilir çelik fabrika binası çözümleri.",
+          "depolar": "Lojistik ve depolama operasyonları için geniş hacimli çelik depo yapıları.",
+          "hayvan-barinalari": "Hayvancılık işletmeleri için havalandırmalı ve dayanıklı çelik barınak yapıları.",
+          "tarimsal-yapilar": "Sera, ahır ve tarım deposu gibi tarımsal faaliyetler için çelik yapı çözümleri."
+        },
+        "features": [
+          "Geniş açıklıklı kirişsiz iç mekân tasarımı imkânı",
+          "Yüksek kar yükü ve rüzgar yüküne karşı hesaplı strüktür",
+          "Çelik bileşenler kumlama ve boya ile uzun süreli korunur",
+          "Vinç ray sistemi ve asma kat entegrasyonuna uygun çelik iskelet",
+          "Hızlı montaj ile üretim kayıplarını minimize eden inşaat süreci"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Sanayi ve Üretim",
+            "items": [
+              "Fabrika ve üretim tesisi",
+              "Montaj ve işleme hangarı",
+              "Makine ekipman alanı",
+              "Üretim destek yapıları"
+            ]
+          },
+          "group2": {
+            "heading": "Depolama ve Tarım",
+            "items": [
+              "Lojistik ve dağıtım deposu",
+              "Soğuk hava deposu",
+              "Tahıl ve ürün ambarı",
+              "Tarımsal depo ve barınak"
+            ]
+          }
         }
       },
       "yapisal-bilesenler": {
@@ -121,6 +260,40 @@
           "cati-ve-celik-sac": "Çatı ve çelik sac",
           "panel-ve-kaplama": "Panel ve kaplama",
           "ozel-uretim": "Özel üretim"
+        },
+        "subcategoryDescriptions": {
+          "celik-profiller": "Taşıyıcı sistem için hassas üretimli standart ve özel çelik profiller.",
+          "sasi-sistemleri": "Konteyner ve modüler yapılar için güçlü çelik şasi sistemleri.",
+          "cati-ve-celik-sac": "Uzun ömürlü ve su yalıtımlı çatı kaplaması ve çelik sac ürünleri.",
+          "panel-ve-kaplama": "Isı yalıtımlı sandviç panel ve cephe kaplama sistemleri.",
+          "ozel-uretim": "Proje gereksinimlerine göre CNC işleme ve özel üretim çelik bileşenler."
+        },
+        "features": [
+          "TSE ve EN standardına uygun sertifikalı çelik profiller",
+          "CNC plazma kesim ve lazer işleme ile hassas toleranslar",
+          "Proje bazlı özel kesit ve boy seçenekleri mevcuttur",
+          "Galvaniz veya epoksi boya ile yüzey koruma alternatifleri",
+          "Hızlı sevkiyat için stok yönetimi ve lojistik desteği"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Yapı Sistemleri",
+            "items": [
+              "Çelik taşıyıcı iskelet",
+              "Çatı makası ve kirişi",
+              "Merdiven ve platform sistemi",
+              "Asma kat yapısı"
+            ]
+          },
+          "group2": {
+            "heading": "Endüstriyel Uygulama",
+            "items": [
+              "Konteyner şasi sistemi",
+              "Cephe ve çatı kaplaması",
+              "Hangar ve depo kapısı",
+              "Sundurma ve gölgelik yapısı"
+            ]
+          }
         }
       }
     }

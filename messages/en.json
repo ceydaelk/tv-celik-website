@@ -76,6 +76,42 @@
           "ofis-ve-idari": "Office & Administrative",
           "sosyal-tesisler": "Social Facilities",
           "egitim-ve-saglik": "Education & Healthcare"
+        },
+        "subcategoryDescriptions": {
+          "tek-katli": "Single-storey prefabricated buildings offering fast installation and cost-effective pricing.",
+          "iki-katli": "Two-storey prefabricated buildings providing larger living and working areas.",
+          "villa-tipi": "Aesthetic and comfortable villa-type prefabricated residential solutions.",
+          "santiye-yapilari": "Durable and portable site offices and accommodation structures.",
+          "ofis-ve-idari": "Construction of modern office and administrative buildings with prefabricated steel structural systems.",
+          "sosyal-tesisler": "Prefabricated social facility buildings such as cafeterias, gymnasiums and community spaces.",
+          "egitim-ve-saglik": "Rapidly procurable prefabricated structures for schools, clinics and health centres."
+        },
+        "features": [
+          "Factory production and on-site assembly reduces construction time significantly",
+          "Steel structural system provides high seismic resistance",
+          "Standard modular dimensions enable fast delivery",
+          "Doors, windows and insulation systems are factory-integrated",
+          "Low long-term maintenance costs and extended service life"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Residential & Living",
+            "items": [
+              "Detached and family homes",
+              "Site personnel facilities",
+              "Holiday and summer houses",
+              "Rural and countryside housing"
+            ]
+          },
+          "group2": {
+            "heading": "Commercial & Institutional",
+            "items": [
+              "Education and school buildings",
+              "Health centres and clinics",
+              "Management and office buildings",
+              "Social and cultural facilities"
+            ]
+          }
         }
       },
       "hafif-celik-yapilar": {
@@ -87,6 +123,40 @@
           "tiny-house": "Tiny House",
           "moduler-konut-sistemleri": "Modular Housing Systems",
           "katlanir-tasinabilir": "Foldable / Portable"
+        },
+        "subcategoryDescriptions": {
+          "hafif-celik-evler": "Earthquake-resistant modern homes manufactured with a light steel structural system.",
+          "villa-projeleri": "Custom villa projects realised with the light steel system.",
+          "tiny-house": "Light steel tiny house structures offering maximum comfort in minimal spaces.",
+          "moduler-konut-sistemleri": "Modular light steel housing systems manufactured in the factory and assembled on site.",
+          "katlanir-tasinabilir": "Light steel structures requiring no permanent foundation — easily transported and reassembled."
+        },
+        "features": [
+          "30–50% lighter than heavy concrete structures",
+          "Corrosion and moisture resistance through galvanised steel profiles",
+          "Fast installation with minimal ground preparation time",
+          "Class A energy efficiency with sandwich panel integration",
+          "Portable or relocatable building option available"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Residential",
+            "items": [
+              "Detached homes and villa projects",
+              "Tiny house applications",
+              "Holiday and countryside homes",
+              "Secondary residential buildings"
+            ]
+          },
+          "group2": {
+            "heading": "Commercial & Multi-Unit",
+            "items": [
+              "Modular housing complexes",
+              "Student and staff dormitories",
+              "Tourism facilities and bungalows",
+              "Management and service buildings"
+            ]
+          }
         }
       },
       "konteyner-sistemleri": {
@@ -99,6 +169,41 @@
           "tiny-house-konteyner": "Tiny House Container",
           "katlanir-konteyner": "Foldable Container",
           "ozel-tasarim": "Custom Design"
+        },
+        "subcategoryDescriptions": {
+          "yasam-konteyneri": "Container systems providing comfortable living spaces at high insulation standards.",
+          "ofis-konteyneri": "Container solutions serving site and office needs with fast installation advantages.",
+          "santiye-konteyneri": "Durable and secure container structures for site operations.",
+          "tiny-house-konteyner": "Container tiny house solutions designed around a minimal living philosophy.",
+          "katlanir-konteyner": "Foldable container systems easy to transport and store, opening quickly when needed.",
+          "ozel-tasarim": "Container structures manufactured to custom dimensions and configurations."
+        },
+        "features": [
+          "High-strength steel body manufactured to ISO standards",
+          "Factory-complete turnkey delivery (electrical, plumbing)",
+          "Modular combination allows complexes of different sizes",
+          "Portable solution with transport and reinstallation support",
+          "Double-skin sandwich panel option for thermal and acoustic insulation"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Site & Temporary",
+            "items": [
+              "Site office and dormitory",
+              "Security and guard post",
+              "Temporary site storage",
+              "Mobile service unit"
+            ]
+          },
+          "group2": {
+            "heading": "Permanent Use",
+            "items": [
+              "Small business office",
+              "Retail point of sale",
+              "Café and sales stand",
+              "Art studio and workshop"
+            ]
+          }
         }
       },
       "endustriyel-celik-yapilar": {
@@ -110,6 +215,40 @@
           "depolar": "Warehouses",
           "hayvan-barinalari": "Animal Shelters",
           "tarimsal-yapilar": "Agricultural Structures"
+        },
+        "subcategoryDescriptions": {
+          "celik-hangarlar": "Wide-span industrial steel hangars with high load-bearing capacity.",
+          "fabrika-binalari": "Customisable steel factory building solutions adapted to production lines.",
+          "depolar": "Large-volume steel warehouse structures for logistics and storage operations.",
+          "hayvan-barinalari": "Ventilated and durable steel shelter structures for livestock operations.",
+          "tarimsal-yapilar": "Steel building solutions for agricultural activities such as greenhouses, barns and farm stores."
+        },
+        "features": [
+          "Wide-span, column-free interior design",
+          "Calculated structure against high snow and wind loads",
+          "Steel components protected long-term with shot-blasting and paint",
+          "Steel frame compatible with crane rail systems and mezzanine integration",
+          "Fast assembly minimises production downtime"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Industry & Production",
+            "items": [
+              "Factory and production facility",
+              "Assembly and processing hangar",
+              "Machine equipment area",
+              "Production support structures"
+            ]
+          },
+          "group2": {
+            "heading": "Storage & Agriculture",
+            "items": [
+              "Logistics and distribution warehouse",
+              "Cold storage facility",
+              "Grain and produce store",
+              "Agricultural warehouse and shelter"
+            ]
+          }
         }
       },
       "yapisal-bilesenler": {
@@ -121,6 +260,40 @@
           "cati-ve-celik-sac": "Roof & Steel Sheet",
           "panel-ve-kaplama": "Panel & Cladding",
           "ozel-uretim": "Custom Manufacturing"
+        },
+        "subcategoryDescriptions": {
+          "celik-profiller": "Precision-manufactured standard and custom steel profiles for load-bearing systems.",
+          "sasi-sistemleri": "Strong steel chassis systems for containers and modular structures.",
+          "cati-ve-celik-sac": "Long-lasting, waterproof roof cladding and steel sheet products.",
+          "panel-ve-kaplama": "Thermally insulated sandwich panels and façade cladding systems.",
+          "ozel-uretim": "CNC-machined and custom-manufactured steel components to project specifications."
+        },
+        "features": [
+          "Certified steel profiles compliant with TSE and EN standards",
+          "Precision tolerances with CNC plasma cutting and laser machining",
+          "Custom cross-section and length options per project",
+          "Surface protection alternatives with galvanising or epoxy paint",
+          "Stock management and logistics support for fast delivery"
+        ],
+        "useCases": {
+          "group1": {
+            "heading": "Building Systems",
+            "items": [
+              "Steel load-bearing frame",
+              "Roof truss and beam",
+              "Staircase and platform system",
+              "Mezzanine structure"
+            ]
+          },
+          "group2": {
+            "heading": "Industrial Application",
+            "items": [
+              "Container chassis system",
+              "Façade and roof cladding",
+              "Hangar and warehouse door",
+              "Canopy and shade structure"
+            ]
+          }
         }
       }
     }

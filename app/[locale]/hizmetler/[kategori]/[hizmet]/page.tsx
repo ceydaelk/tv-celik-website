@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { CATEGORIES, SERVICES_MAP, CATEGORY_FEATURES, GENERIC_FEATURES } from "@/data/services";
-import { CATEGORY_USE_CASES, GENERIC_USE_CASES } from "@/data/serviceUseCases";
+import { CATEGORY_USE_CASES, GENERIC_USE_CASES, type UseCases } from "@/data/serviceUseCases";
 import { getSubcategoryBySlug } from "@/lib/firestore/services";
 import { mergeSubcategory } from "@/lib/content/mergeSubcategory";
 import { getCompanyData } from "@/lib/firestore/company";
@@ -33,11 +33,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, kategori, hizmet } = await params;
   const isTr = locale === "tr";
+  const ts = await getTranslations({ locale, namespace: "services" });
   const fsSub   = await getSubcategoryBySlug(hizmet);
   const service = fsSub ?? SERVICES_MAP[hizmet];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tsAny = ts as any;
+  const translatedLabel = tsAny(`categories.${kategori}.subcategories.${hizmet}`) as string
+    ?? service?.label
+    ?? hizmet;
+
+  let translatedDescription: string = service?.description ?? "";
+  try {
+    const descs = tsAny.raw(`categories.${kategori}.subcategoryDescriptions`) as Record<string, string> | undefined;
+    if (descs?.[hizmet]) translatedDescription = descs[hizmet];
+  } catch { /* use fallback */ }
+
   return {
-    title:       fsSub?.seoTitle       || (service ? `${service.label} — TV Çelik A.Ş.` : "Hizmet — TV Çelik A.Ş."),
-    description: fsSub?.seoDescription || service?.description,
+    title:       fsSub?.seoTitle       || `${translatedLabel} — TV Çelik A.Ş.`,
+    description: fsSub?.seoDescription || translatedDescription,
     alternates: {
       canonical: isTr ? `/hizmetler/${kategori}/${hizmet}` : `/en/hizmetler/${kategori}/${hizmet}`,
       languages: {
@@ -69,13 +83,46 @@ export default async function HizmetDetayPage({
   const category   = CATEGORIES.find((c) => c.slug === kategori) ?? { header: kategori, slug: kategori, subcategories: [], description: "" };
   const isFoldable = FOLDABLE_SLUGS.includes(hizmet as typeof FOLDABLE_SLUGS[number]);
 
+  // Resolve locale-aware category header before building merged
+  const categoryHeader = ts(`categories.${kategori}.header`, { fallback: category.header }) as string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const tsAny = ts as any;
+
+  // Translated subcategory label (e.g. "Single Storey" in EN)
+  const translatedLabel: string = tsAny(`categories.${kategori}.subcategories.${hizmet}`)
+    ?? hcSvc?.label
+    ?? fsSub?.label
+    ?? hizmet;
+
+  // Translated subcategory description
+  let translatedDescription: string = hcSvc?.description ?? fsSub?.description ?? "";
+  try {
+    const descs = tsAny.raw(`categories.${kategori}.subcategoryDescriptions`) as Record<string, string> | undefined;
+    if (descs?.[hizmet]) translatedDescription = descs[hizmet];
+  } catch { /* use hardcoded fallback */ }
+
+  // Translated features / advantages
+  let translatedFeatures: string[] = CATEGORY_FEATURES[kategori] ?? GENERIC_FEATURES;
+  try {
+    const feats = tsAny.raw(`categories.${kategori}.features`);
+    if (Array.isArray(feats) && feats.length > 0) translatedFeatures = feats as string[];
+  } catch { /* use hardcoded fallback */ }
+
+  // Translated use cases
+  let useCases: UseCases = CATEGORY_USE_CASES[kategori] ?? GENERIC_USE_CASES;
+  try {
+    const uc = tsAny.raw(`categories.${kategori}.useCases`) as UseCases | undefined;
+    if (uc?.group1 && uc?.group2) useCases = uc;
+  } catch { /* use hardcoded fallback */ }
+
   const merged = mergeSubcategory(fsSub ?? null, {
-    label:          hcSvc?.label       ?? fsSub?.label       ?? hizmet,
-    description:    hcSvc?.description ?? fsSub?.description ?? "",
+    label:          translatedLabel,
+    description:    translatedDescription,
     categorySlug:   kategori,
-    categoryHeader: category.header,
+    categoryHeader: categoryHeader,
     order:          0,
-    features:       CATEGORY_FEATURES[kategori] ?? GENERIC_FEATURES,
+    features:       translatedFeatures,
   });
 
   const local = getLocalServiceImages(hizmet);
@@ -101,13 +148,10 @@ export default async function HizmetDetayPage({
   }
 
   const textSections = merged.sections.filter((s) => s.title || s.text);
-  const useCases     = CATEGORY_USE_CASES[kategori] ?? GENERIC_USE_CASES;
   const defaultWaMsg = t("whatsappDefaultMsg", { service: merged.label });
   const whatsappMsg  = merged.ctaWhatsappText || (locale === "tr"
     ? `Merhaba, ${merged.label} hakkında bilgi almak istiyorum.`
     : defaultWaMsg);
-
-  const categoryHeader = ts(`categories.${kategori}.header`, { fallback: category.header });
 
   const processSteps = [
     { n: "01", title: t("processStep01Title"), desc: t("processStep01Desc") },
